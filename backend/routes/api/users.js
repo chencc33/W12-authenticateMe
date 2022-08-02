@@ -8,31 +8,6 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-// Sign up
-router.post(
-    '/',
-    async (req, res) => {
-        const { firstName, lastName, email, username, password } = req.body;
-        // call the signup static method on the User model
-        const user = await User.signup({ firstName, lastName, email, username, password });
-        if (user)
-            // if the user is successfully created, call setToken Cookie
-            await setTokenCookie(res, user);
-        // return a JSON response with the user information
-        return res.json(
-            // user
-            {
-                id: user.id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                username: user.username,
-                token: ""
-            }
-        );
-    }
-);
-
 const validateSignup = [
     check('email')
         .exists({ checkFalsy: true })
@@ -58,13 +33,57 @@ router.post(
     '/',
     validateSignup,
     async (req, res) => {
-        const { email, password, username } = req.body;
-        const user = await User.signup({ email, username, password });
+        const { firstName, lastName, email, username, password } = req.body;
+        if (!firstName || !lastName || !username) {
+            res.status(400)
+            res.json({
+
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    email: "Invalid email",
+                    username: "Username is required",
+                    firstName: "First Name is required",
+                    lastName: "Last Name is required"
+                }
+            })
+        }
+        const userEmail = await User.findOne({ where: { email: email } })
+        if (userEmail) {
+            res.status(403)
+            res.json(
+                {
+                    message: "User already exists",
+                    statusCode: 403,
+                    errors: {
+                        email: "User with that email already exists"
+                    }
+                }
+            )
+        }
+        const userName = await User.findOne({ where: { username: username } })
+        if (userName) {
+            res.status(403)
+            res.json({
+                message: "User already exists",
+                statusCode: 403,
+                errors: {
+                    username: "User with that username already exists"
+                }
+            })
+        }
+
+        const user = await User.signup({ firstName, lastName, email, username, password });
 
         await setTokenCookie(res, user);
 
         return res.json({
-            user,
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            username: user.username,
+            token: ""
         });
     }
 );

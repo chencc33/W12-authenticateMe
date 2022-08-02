@@ -73,9 +73,12 @@ router.get(
         const { user } = req;
         //return the session user as JSON under the key of user
         if (user) {
-            return res.json({
-                user: user.toSafeObject()
-            });
+            return res.json(
+                user.toSafeObject()
+                //     {
+                //     user: user.toSafeObject()
+                // }
+            );
         }
         // if there is no session, return JSON with an empty obj
         else return res.json({});
