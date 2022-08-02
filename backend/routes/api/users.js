@@ -12,15 +12,24 @@ const { handleValidationErrors } = require('../../utils/validation');
 router.post(
     '/',
     async (req, res) => {
-        const { email, password, username } = req.body;
+        const { firstName, lastName, email, username, password } = req.body;
         // call the signup static method on the User model
-        const user = await User.signup({ email, username, password });
-        // if the user is successfully created, call setToken Cookie
-        await setTokenCookie(res, user);
+        const user = await User.signup({ firstName, lastName, email, username, password });
+        if (user)
+            // if the user is successfully created, call setToken Cookie
+            await setTokenCookie(res, user);
         // return a JSON response with the user information
-        return res.json({
-            user
-        });
+        return res.json(
+            // user
+            {
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                username: user.username,
+                token: ""
+            }
+        );
     }
 );
 
