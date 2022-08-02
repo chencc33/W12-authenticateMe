@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
           [Op.or]: {
             username: credential,
             email: credential
-          }
+          },
         }
       });
       if (user && user.validatePassword(password)) {
@@ -103,10 +103,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     scopes: {
       currentUser: {
-        attributes: { exclude: ['hashedPassword'] }
+        attributes: { exclude: ['hashedPassword', 'createdAt', 'updatedAt'] }
       },
       loginUser: {
-        attributes: {}
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
       }
     }
   });

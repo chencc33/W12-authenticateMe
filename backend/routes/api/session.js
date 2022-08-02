@@ -18,20 +18,41 @@ router.post(
         const { credential, password } = req.body;
 
         const user = await User.login({ credential, password });
+        if (!credential || !password) {
+            res.status = 400
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    credential: "Email or username is required",
+                    password: "Password is required"
+                }
+            })
+        }
         //if no user returned, create error and invoke next err-handling
         if (!user) {
-            const err = new Error('Login failed');
-            err.status = 401;
-            err.title = 'Login failed';
-            err.errors = ['The provided credentials were invalid.'];
-            return next(err);
+            // const err = new Error('Login failed');
+            res.status = 401;
+            // err.title = 'Login failed';
+            // err.errors = ['Invalid credentials'];
+            //     return next(err);
+            res.json({
+                message: 'Invalid credentials',
+                statusCode: 401
+            })
         }
         // if user returned, call the setTokenCookie method
         await setTokenCookie(res, user);
 
         return res.json({
-            user
-        });
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            username: user.username,
+            email: user.email,
+            token: ""
+        }
+        );
     }
 );
 
@@ -99,14 +120,5 @@ router.post(
     }
 );
 
-// router.get('/', async (req, res, next) => {
-//     const { credential, password } = req.body
-//     const user = await User.login({ credential, password })
-//     // const currentUser = await User.findAll({
-//     //     where: { username: user.username },
-//     //     attributes: ['id', 'firstName', 'lastName', 'email', 'username']
-//     // })
-//     res.json({ message: 'je;;p' })
-// })
 
 module.exports = router;
