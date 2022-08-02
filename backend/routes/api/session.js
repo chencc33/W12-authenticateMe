@@ -99,4 +99,14 @@ router.post(
     }
 );
 
+// router.get('/', async (req, res, next) => {
+//     const { credential, password } = req.body
+//     const user = await User.login({ credential, password })
+//     // const currentUser = await User.findAll({
+//     //     where: { username: user.username },
+//     //     attributes: ['id', 'firstName', 'lastName', 'email', 'username']
+//     // })
+//     res.json({ message: 'je;;p' })
+// })
+
 module.exports = router;
