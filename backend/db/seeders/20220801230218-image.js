@@ -18,6 +18,13 @@ module.exports = {
         spotId: 1,
         reviewId: 1,
         userId: 1
+      },
+      {
+        url: "image url 2",
+        previewImage: true,
+        spotId: 2,
+        reviewId: 2,
+        userId: 1
       }
     ])
   },
