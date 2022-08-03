@@ -259,7 +259,7 @@ Returns all the songs.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -293,7 +293,7 @@ Returns all the songs created by the current user.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -327,7 +327,7 @@ Returns all the songs created by the specified artist.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -372,16 +372,16 @@ Returns the details of a song specified by its id.
       "url": "audio url",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url",
+      "imageUrl": "image url",
       "Artist": {
         "id": 1,
         "username": "JohnSmith",
-        "previewImage": "image url"
+        "imageUrl": "image url"
       },
       "Album": {
         "id": 1,
         "title": "Time",
-        "previewImage": "image url"
+        "imageUrl": "image url"
       }
     }
     ```
@@ -401,7 +401,7 @@ Returns the details of a song specified by its id.
 
 ### Create a Song
 
-Creates and returns a new song with or without an album.
+Creates and returns a new song.
 
 * Require Authentication: true
 * Request
@@ -449,7 +449,7 @@ Creates and returns a new song with or without an album.
       "url": "audio url",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -523,7 +523,7 @@ Updates and returns an existing song.
       "url": "audio url",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 20:00:00",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -621,7 +621,7 @@ Returns all the playlists created by the specified artist.
           "name": "Current Favorites",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -672,7 +672,7 @@ Creates and returns a new playlist.
       "name": "Current Favorites",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -774,7 +774,7 @@ Returns the details of a playlist specified by its id.
       "name": "Current Favorites",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url",
+      "imageUrl": "image url",
       "Songs": [
         {
           "id": 1,
@@ -785,7 +785,7 @@ Returns the details of a playlist specified by its id.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -837,7 +837,7 @@ Updates and returns an existing playlist.
       "name": "Current Favorites",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 20:00:00",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -932,7 +932,7 @@ Returns all the playlists created by the current user.
           "name": "Current Favorites",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -1182,7 +1182,7 @@ Returns all the Albums.
           "description": "An album about time.",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -1214,7 +1214,7 @@ Returns all the Albums created by the current user.
           "description": "An album about time.",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -1246,7 +1246,7 @@ Returns all the albums created by the specified artist.
           "description": "An album about time.",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -1289,11 +1289,11 @@ Returns the details of an album specified by its id.
       "description": "An album about time.",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url",
+      "imageUrl": "image url",
       "Artist": {
         "id": 1,
         "username": "JohnSmith",
-        "previewImage": "image url"
+        "imageUrl": "image url"
       },
       "Songs": [
         {
@@ -1305,7 +1305,7 @@ Returns the details of an album specified by its id.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -1358,7 +1358,7 @@ Creates and returns a new album.
       "description": "An album about time.",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -1413,7 +1413,7 @@ Updates and returns an existing album.
       "description": "An album about time.",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 20:00:00",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -1507,7 +1507,7 @@ Returns the details of an artist specified by their id.
       "username": "JohnSmith",
       "totalSongs": 10,
       "totalAlbums": 2,
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -1557,7 +1557,7 @@ Return songs filtered by query parameters.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ],
       "page": 2,
