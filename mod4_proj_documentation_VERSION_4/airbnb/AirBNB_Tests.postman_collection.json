@@ -319,7 +319,8 @@
 					"script": {
 						"exec": [
 							"const responseJson = pm.response.json();",
-							"postman.setEnvironmentVariable('spotId', responseJson.id)"
+							"postman.setEnvironmentVariable('spotId', responseJson.id)",
+							"postman.setEnvironmentVariable('spotIdForBooking', responseJson.id - 1)"
 						],
 						"type": "text/javascript"
 					}
@@ -389,7 +390,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"url\": \"image.url\"\n}",
+					"raw": "{\n  \"url\": \"image.url\",\n  \"previewImage\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -863,8 +864,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"const responseJson = pm.response.json();",
-							"postman.setEnvironmentVariable('reviewId', responseJson.id)"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -936,7 +936,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"url\": \"image.url\"\n}",
+					"raw": "{\n  \"url\": \"image.url\",\n  \"previewImage\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1330,13 +1330,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/spots/{{spotId}}/bookings",
+					"raw": "{{url}}/spots/{{spotIdForBooking}}/bookings",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"spots",
-						"{{spotId}}",
+						"{{spotIdForBooking}}",
 						"bookings"
 					]
 				}
@@ -1384,13 +1384,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/spots/{{spotId}}/bookings",
+					"raw": "{{url}}/spots/{{spotIdForBooking}}/bookings",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"spots",
-						"{{spotId}}",
+						"{{spotIdForBooking}}",
 						"bookings"
 					]
 				}

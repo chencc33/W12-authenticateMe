@@ -404,7 +404,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"title\": \"Yesterday\",\n  \"description\": \"A song about the past.\",\n  \"url\": \"audio url\",\n  \"imageUrl\": \"image.url\"\n}",
+					"raw": "{\n  \"title\": \"Yesterday\",\n  \"description\": \"A song about the past.\",\n  \"url\": \"audio url\",\n  \"imageUrl\": \"image.url\",\n  \"albumId\": {{albumId}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -412,13 +412,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/albums/{{albumId}}/songs",
+					"raw": "{{url}}/songs",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"albums",
-						"{{albumId}}",
 						"songs"
 					]
 				}
@@ -859,6 +857,63 @@
 					"path": [
 						"albums",
 						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Albums of an Artist from an Id",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "XSRF-TOKEN",
+						"value": "{{xsrftoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/artists/{{userId}}/albums",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"artists",
+						"{{userId}}",
+						"albums"
 					]
 				}
 			},
