@@ -249,7 +249,7 @@ router.post('/:spotId/reviews', validateReview, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
     const { review, stars } = req.body
-    const reviews = await Review.findOne({ where: { spotId: req.params.spotId } })
+    const reviews = await Review.findAll({ where: { spotId: req.params.spotId } })
     const spot = await Spot.findByPk(req.params.spotId)
     const newReivew = await Review.create({
         userId: userId,
@@ -257,23 +257,24 @@ router.post('/:spotId/reviews', validateReview, async (req, res, next) => {
         review: review,
         stars: stars
     })
-    res.json(reviews)
-    if (reviews.userId === userId) {
-        res.status(403)
-        res.json({
-            "message": "User already has a review for this spot",
-            "statusCode": 403
-        })
+    for (let review of reviews) {
+        if (review.userId === userId) {
+            res.status(403)
+            res.json({
+                "message": "User already has a review for this spot",
+                "statusCode": 403
+            })
+        }
     }
-    // if (!spot) {
-    //     res.status(404)
-    //     res.json({
-    //         "message": "Spot couldn't be found",
-    //         "statusCode": 404
-    //     })
-    // } else {
-    //     res.json(newReivew)
-    // }
+    if (!spot) {
+        res.status(404)
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    } else {
+        res.json(newReivew)
+    }
 
 })
 module.exports = router;
