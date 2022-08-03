@@ -58,12 +58,34 @@ router.post('/:reviewId/images', restoreUser, async (req, res, next) => {
 })
 
 // edit a review
-router.put('/:reviewId', restoreUser, async (req, res, next) => {
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .withMessage('Stars must be an integer from 1 to 5')
+]
+router.put('/:reviewId', restoreUser, validateReview, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
 
-    const review = await Review.findByPk(req.params.reviewId)
-    res.json(review)
+    const { review, stars } = req.body
+    const editReview = await Review.findByPk(req.params.reviewId)
+    if (!editReview) {
+        res.status(404)
+        res.json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+        })
+    } else {
+        await editReview.update({
+            userId: userId,
+            review,
+            stars
+        })
+        res.json(editReview)
+    }
 })
 
 module.exports = router;
