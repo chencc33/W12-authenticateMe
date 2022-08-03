@@ -51,7 +51,7 @@ router.get('/current', restoreUser, async (req, res, next) => {
 
 //get details of a spot from an id
 router.get('/:spotId', async (req, res, next) => {
-    const spotById = await Spot.findAll({
+    const spotById = await Spot.findOne({
         where: { id: parseInt(req.params.spotId) },
         attributes: {
             include: [
@@ -65,34 +65,41 @@ router.get('/:spotId', async (req, res, next) => {
             { model: Review, attributes: [] }
         ]
     })
+    if (!spotById.id) {
+        res.status(404)
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    } else {
+        let images = spotById.Images
+        images[0] = {
+            id: images[0].id,
+            imageableId: spotById.id,
+            url: images[0].url
+        }
+        let spotResponse = {
+            id: spotById.id,
+            ownerId: spotById.ownerId,
+            address: spotById.address,
+            city: spotById.city,
+            state: spotById.state,
+            country: spotById.country,
+            lat: spotById.lat,
+            lng: spotById.lng,
+            name: spotById.name,
+            description: spotById.description,
+            price: spotById.price,
+            createdAt: spotById.createdAt,
+            updatedAt: spotById.updatedAt,
+            numReviews: spotById.numReviews,
+            avgStarRating: spotById.avgStarRating,
+            Images: images,
+            Owner: spotById.User
+        }
+        res.json(spotResponse)
+    }
 
-    let spotData = spotById[0]
-    let images = spotData.Images
-    images[0] = {
-        id: images[0].id,
-        imageableId: spotData.id,
-        url: images[0].url
-    }
-    let spotResponse = {
-        id: spotData.id,
-        ownerId: spotData.ownerId,
-        address: spotData.address,
-        city: spotData.city,
-        state: spotData.state,
-        country: spotData.country,
-        lat: spotData.lat,
-        lng: spotData.lng,
-        name: spotData.name,
-        description: spotData.description,
-        price: spotData.price,
-        createdAt: spotData.createdAt,
-        updatedAt: spotData.updatedAt,
-        numReviews: spotData.numReviews,
-        avgStarRating: spotData.avgStarRating,
-        Images: images,
-        Owner: spotData.User
-    }
-    res.json(spotResponse)
 })
 
 module.exports = router;
