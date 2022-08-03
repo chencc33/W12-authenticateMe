@@ -214,4 +214,35 @@ router.delete('/:spotId', async (req, res, next) => {
     }
 })
 
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .withMessage('Stars must be an integer from 1 to 5')
+]
+//create and return a new review for a spot specified by id
+router.post('/:spotId/reviews', validateReview, async (req, res, next) => {
+    const { user } = req
+    const userId = user.toSafeObject().id
+    const { review, stars } = req.body
+    const spot = await Spot.findByPk(req.params.spotId)
+    const newReivew = await Review.create({
+        userId: userId,
+        spotId: req.params.spotId,
+        review: review,
+        stars: stars
+    })
+    if (!spot) {
+        res.status(404)
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    } else {
+        res.json({ Reviews: newReivew })
+    }
+
+})
 module.exports = router;
