@@ -53,6 +53,7 @@ router.get('/current', restoreUser, async (req, res, next) => {
 })
 
 //get details of a spot from an id
+// try lazy loading
 router.get('/:spotId', async (req, res, next) => {
     const spotById = await Spot.findOne({
         where: { id: parseInt(req.params.spotId) },
@@ -106,6 +107,7 @@ router.get('/:spotId', async (req, res, next) => {
 })
 
 //create a spot
+// need to add ownerId
 const validateCreateSpot = [
     check('address')
         .exists({ checkFalsy: true })
@@ -139,7 +141,34 @@ router.post('/', validateCreateSpot, async (req, res, next) => {
     const newSpot = await Spot.create({
         address, city, state, country, lat, lng, name, description, price
     })
-    res.json(newSpot)
+    const newSpotInfo = await Spot.findByPk(newSpot.id)
+    res.json(newSpotInfo)
+})
+
+//add an Image to a spot based on the spot's id
+router.post('/:spotId/images', async (req, res, next) => {
+    const { url } = req.body
+    const editSpot = await Spot.findOne({
+        where: { id: req.params.spotId }
+    })
+    const newImage = await Image.create({
+        url: url,
+        spotId: req.params.spotId
+    })
+    const editImageResponse = {
+        id: newImage.id,
+        imageableId: newImage.spotId,
+        url: newImage.url
+    }
+    if (!editSpot) {
+        res.status(404)
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    } else {
+        res.json(editImageResponse)
+    }
 })
 
 module.exports = router;
