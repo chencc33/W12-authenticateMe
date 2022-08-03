@@ -53,7 +53,6 @@ router.get('/current', restoreUser, async (req, res, next) => {
 })
 
 //get details of a spot from an id
-// try lazy loading
 router.get('/:spotId', async (req, res, next) => {
     const spotById = await Spot.findOne({
         where: { id: parseInt(req.params.spotId) },
