@@ -108,7 +108,7 @@ router.get('/:spotId', async (req, res, next) => {
 
 //create a spot
 // need to add ownerId
-const validateCreateSpot = [
+const validateSpot = [
     check('address')
         .exists({ checkFalsy: true })
         .withMessage('Street address is required'),
@@ -136,7 +136,7 @@ const validateCreateSpot = [
         .withMessage('Price per day is required'),
     handleValidationErrors
 ];
-router.post('/', validateCreateSpot, async (req, res, next) => {
+router.post('/', validateSpot, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
     const newSpot = await Spot.create({
         address, city, state, country, lat, lng, name, description, price
@@ -168,6 +168,28 @@ router.post('/:spotId/images', async (req, res, next) => {
         })
     } else {
         res.json(editImageResponse)
+    }
+})
+
+//edit a spot
+router.put('/:spotId', restoreUser, validateSpot, async (req, res, next) => {
+    const { user } = req
+    const userId = user.toSafeObject().id
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const editSpot = await Spot.findByPk(req.params.spotId)
+    if (!editSpot) {
+        res.status(404)
+        res.json(
+            {
+                "message": "Spot couldn't be found",
+                "statusCode": 404
+            }
+        )
+    } else {
+        editSpot.update({
+            ownerId: userId, address, city, state, country, lat, lng, name, description, price
+        })
+        res.json(editSpot)
     }
 })
 
