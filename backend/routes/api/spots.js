@@ -107,7 +107,6 @@ router.get('/:spotId', async (req, res, next) => {
 })
 
 //create a spot
-// need to add ownerId
 const validateSpot = [
     check('address')
         .exists({ checkFalsy: true })
@@ -137,9 +136,11 @@ const validateSpot = [
     handleValidationErrors
 ];
 router.post('/', validateSpot, async (req, res, next) => {
+    const { user } = req
+    const userId = user.toSafeObject().id
     const { address, city, state, country, lat, lng, name, description, price } = req.body
     const newSpot = await Spot.create({
-        address, city, state, country, lat, lng, name, description, price
+        ownerId: userId, address, city, state, country, lat, lng, name, description, price
     })
     const newSpotInfo = await Spot.findByPk(newSpot.id)
     res.json(newSpotInfo)
