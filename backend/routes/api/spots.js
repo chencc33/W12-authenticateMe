@@ -31,21 +31,22 @@ router.get('/', async (req, res, next) => {
 router.get('/current', restoreUser, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
-    const spotsByuserId = await Spot.findAll({
-        where: { ownerId: parseInt(userId) },
-        attributes: {
-            include: [
-                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating'],
-                [sequelize.literal("Images.url"), "previewImage"]
-            ]
-        },
-        include: [
-            { model: Review, attributes: [] },
-            { model: Image, attributes: [] }
-        ],
-        group: ['Spot.id']
-    })
-    res.json({ spotsByuserId })
+    const spots = await Spot.findAll({ where: { ownerId: userId } })
+
+    let arrSpotResponse = []
+    for (let spot of spots) {
+        let spotReviewSum = await Review.sum('stars', { where: { spotId: spot.id } })
+        let spotReviewNum = await Review.count({ where: { spotId: spot.id } })
+        let avgRating = spotReviewSum / spotReviewNum
+        let imageUrl = await Image.findOne({ where: { spotId: spot.id }, attributes: ['url'] })
+        spot = {
+            ...spot.dataValues,
+            avgRating: avgRating,
+            previewImage: imageUrl.url
+        }
+        arrSpotResponse.push(spot)
+    }
+    res.json(arrSpotResponse)
 })
 
 //get details of a spot from an id
