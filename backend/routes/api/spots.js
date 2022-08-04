@@ -9,27 +9,54 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 // get all spots
 router.get('/', async (req, res, next) => {
+    let { page, size } = req.query
+    page = parseInt(page)
+    size = parseInt(size)
+    if (!page) page = 1
+    if (!size) size = 20
     const spots = await Spot.findAll({
-
         attributes: {
             include: [
-                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating'],
-                // [sequelize.literal("Images.url"), "previewImage"]
+                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
             ]
         },
         include: [
             {
-                model: Review,
-                attributes: []
+                model: Review, attributes: []
             },
-            {
-                model: Image,
-                attributes: []
-            }
+            { model: Image, attributes: ['url'] }
         ],
-        group: ['Spot.id']
+        group: ['Spot.id'],
+        limit: size,
+        offset: size * (page - 1)
     })
-    res.json({ Spots: spots })
+    // res.json(spots)
+    let arrSpotResponse = []
+    for (let spot of spots) {
+        let spotResponse = {
+            spot: spot.id,
+            ownerId: spot.ownerId,
+            address: spot.address,
+            city: spot.city,
+            state: spot.state,
+            country: spot.country,
+            lat: spot.lat,
+            lng: spot.lng,
+            name: spot.name,
+            description: spot.description,
+            price: spot.price,
+            createdAt: spot.createdAt,
+            updatedAt: spot.updatedAt,
+            avgRating: spot.dataValues.avgRating,
+            previewImage: spot.Images[0].url
+        }
+        arrSpotResponse.push(spotResponse)
+        // return res.json(spotResponse)
+    }
+
+    res.json({
+        Spots: arrSpotResponse
+    })
 })
 
 // get all spots by current user
@@ -55,54 +82,96 @@ router.get('/current', restoreUser, async (req, res, next) => {
 
 //get details of a spot from an id
 router.get('/:spotId', async (req, res, next) => {
-    const spotById = await Spot.findOne({
-        where: { id: parseInt(req.params.spotId) },
-        attributes: {
-            include: [
-                [sequelize.fn('COUNT', sequelize.col('Reviews.spotId')), 'numReviews'],
-                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'],
-            ]
-        },
-        include: [
-            { model: Image, attributes: ['id', 'url'] },
-            { model: User, attributes: ['id', 'firstName', 'lastName'] },
-            { model: Review, attributes: [] }
-        ]
+    const spot = await Spot.findOne({
+        where: { id: req.params.spotId }
     })
-    if (!spotById.id) {
+    // if spotId not found
+    if (!spot) {
         res.status(404)
-        res.json({
+        return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
-    } else {
-        let images = spotById.Images
-        images[0] = {
-            id: images[0].id,
-            imageableId: spotById.id,
-            url: images[0].url
-        }
-        let spotResponse = {
-            id: spotById.id,
-            ownerId: spotById.ownerId,
-            address: spotById.address,
-            city: spotById.city,
-            state: spotById.state,
-            country: spotById.country,
-            lat: spotById.lat,
-            lng: spotById.lng,
-            name: spotById.name,
-            description: spotById.description,
-            price: spotById.price,
-            createdAt: spotById.createdAt,
-            updatedAt: spotById.updatedAt,
-            numReviews: spotById.dataValues.numReviews,
-            avgStarRating: spotById.dataValues.avgStarRating,
-            Images: images,
-            Owner: spotById.User
-        }
-        res.json(spotResponse)
     }
+    const images = await spot.getImages({ attributes: ['id', 'url'] })
+    const sumRating = await Review.sum('stars', { where: { spotId: req.params.spotId } })
+    const numReviews = await Review.count({ where: { spotId: req.params.spotId } })
+    const avgStarRating = sumRating / numReviews
+    let owners = await User.findOne({ where: spot.ownerId, attributes: ['id', 'firstName', 'lastName'] })
+    let imageData = images
+    imageData = {
+        id: images[0].id,
+        imageableId: spot.id,
+        url: images[0].url
+    }
+    let spotResponse = {
+        id: spot.id,
+        ownerId: spot.ownerId,
+        address: spot.address,
+        city: spot.city,
+        state: spot.state,
+        country: spot.country,
+        lat: spot.lat,
+        lng: spot.lng,
+        name: spot.name,
+        description: spot.description,
+        price: spot.price,
+        createdAt: spot.createdAt,
+        updatedAt: spot.updatedAt,
+        numReviews: numReviews,
+        avgStarRating: avgStarRating,
+        Images: imageData,
+        Owner: owners
+    }
+    return res.json(spotResponse)
+    // const spotById = await Spot.findOne({
+    //     where: { id: parseInt(req.params.spotId) },
+    //     attributes: {
+    //         include: [
+    //             [sequelize.fn('COUNT', sequelize.col('Reviews.spotId')), 'numReviews'],
+    //             [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'],
+    //         ]
+    //     },
+    //     include: [
+    //         { model: Image, attributes: ['id', 'url'] },
+    //         { model: User, attributes: ['id', 'firstName', 'lastName'] },
+    //         { model: Review, attributes: [] }
+    //     ]
+    // })
+    // if (!spotById.id) {
+    //     res.status(404)
+    //     res.json({
+    //         "message": "Spot couldn't be found",
+    //         "statusCode": 404
+    //     })
+    // } else {
+    //     let images = spotById.Images
+    //     images[0] = {
+    //         id: images[0].id,
+    //         imageableId: spotById.id,
+    //         url: images[0].url
+    //     }
+    //     let spotResponse = {
+    //         id: spotById.id,
+    //         ownerId: spotById.ownerId,
+    //         address: spotById.address,
+    //         city: spotById.city,
+    //         state: spotById.state,
+    //         country: spotById.country,
+    //         lat: spotById.lat,
+    //         lng: spotById.lng,
+    //         name: spotById.name,
+    //         description: spotById.description,
+    //         price: spotById.price,
+    //         createdAt: spotById.createdAt,
+    //         updatedAt: spotById.updatedAt,
+    //         numReviews: spotById.dataValues.numReviews,
+    //         avgStarRating: spotById.dataValues.avgStarRating,
+    //         Images: images,
+    //         Owner: spotById.User
+    //     }
+    //     res.json(spotResponse)
+    // }
 
 })
 
