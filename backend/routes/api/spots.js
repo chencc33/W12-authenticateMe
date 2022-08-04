@@ -9,54 +9,22 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 // get all spots
 router.get('/', async (req, res, next) => {
-    let { page, size } = req.query
-    page = parseInt(page)
-    size = parseInt(size)
-    if (!page) page = 1
-    if (!size) size = 20
-    const spots = await Spot.findAll({
-        attributes: {
-            include: [
-                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
-            ]
-        },
-        include: [
-            {
-                model: Review, attributes: []
-            },
-            { model: Image, attributes: ['url'] }
-        ],
-        group: ['Spot.id'],
-        limit: size,
-        offset: size * (page - 1)
-    })
-    // res.json(spots)
+
+    const spots = await Spot.findAll()
     let arrSpotResponse = []
     for (let spot of spots) {
-        let spotResponse = {
-            spot: spot.id,
-            ownerId: spot.ownerId,
-            address: spot.address,
-            city: spot.city,
-            state: spot.state,
-            country: spot.country,
-            lat: spot.lat,
-            lng: spot.lng,
-            name: spot.name,
-            description: spot.description,
-            price: spot.price,
-            createdAt: spot.createdAt,
-            updatedAt: spot.updatedAt,
-            avgRating: spot.dataValues.avgRating,
-            previewImage: spot.Images[0].url
+        let spotReviewSum = await Review.sum('stars', { where: { spotId: spot.id } })
+        let spotReviewNum = await Review.count({ where: { spotId: spot.id } })
+        let avgRating = spotReviewSum / spotReviewNum
+        let imageUrl = await Image.findOne({ where: { spotId: spot.id }, attributes: ['url'] })
+        spot = {
+            ...spot.dataValues,
+            avgRating: avgRating,
+            previewImage: imageUrl.url
         }
-        arrSpotResponse.push(spotResponse)
-        // return res.json(spotResponse)
+        arrSpotResponse.push(spot)
     }
-
-    res.json({
-        Spots: arrSpotResponse
-    })
+    res.json(arrSpotResponse)
 })
 
 // get all spots by current user
@@ -124,55 +92,6 @@ router.get('/:spotId', async (req, res, next) => {
         Owner: owners
     }
     return res.json(spotResponse)
-    // const spotById = await Spot.findOne({
-    //     where: { id: parseInt(req.params.spotId) },
-    //     attributes: {
-    //         include: [
-    //             [sequelize.fn('COUNT', sequelize.col('Reviews.spotId')), 'numReviews'],
-    //             [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'],
-    //         ]
-    //     },
-    //     include: [
-    //         { model: Image, attributes: ['id', 'url'] },
-    //         { model: User, attributes: ['id', 'firstName', 'lastName'] },
-    //         { model: Review, attributes: [] }
-    //     ]
-    // })
-    // if (!spotById.id) {
-    //     res.status(404)
-    //     res.json({
-    //         "message": "Spot couldn't be found",
-    //         "statusCode": 404
-    //     })
-    // } else {
-    //     let images = spotById.Images
-    //     images[0] = {
-    //         id: images[0].id,
-    //         imageableId: spotById.id,
-    //         url: images[0].url
-    //     }
-    //     let spotResponse = {
-    //         id: spotById.id,
-    //         ownerId: spotById.ownerId,
-    //         address: spotById.address,
-    //         city: spotById.city,
-    //         state: spotById.state,
-    //         country: spotById.country,
-    //         lat: spotById.lat,
-    //         lng: spotById.lng,
-    //         name: spotById.name,
-    //         description: spotById.description,
-    //         price: spotById.price,
-    //         createdAt: spotById.createdAt,
-    //         updatedAt: spotById.updatedAt,
-    //         numReviews: spotById.dataValues.numReviews,
-    //         avgStarRating: spotById.dataValues.avgStarRating,
-    //         Images: images,
-    //         Owner: spotById.User
-    //     }
-    //     res.json(spotResponse)
-    // }
-
 })
 
 //create a spot
