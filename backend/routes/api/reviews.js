@@ -7,7 +7,6 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 //get all the reviews of the current user
-// the imageableId is spotId now
 router.get('/current', restoreUser, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
@@ -17,8 +16,28 @@ router.get('/current', restoreUser, async (req, res, next) => {
             { model: Spot, attributes: { exclude: ['createdAt', 'updatedAt'] } },
             { model: Image, attributes: ['id', 'spotId', 'url'] }
         ]
+        // raw: true
     })
-    res.json(reviews)
+    // for (let review of reviews) {
+    //     const images = await review.getImages({ attributes: ['id', 'spotId', 'url'] })
+    //     review.Images = images
+    // }
+    // console.log(reviews)
+    let arrReviewsResponse = []
+    let arrImages = []
+    for (let review of reviews) {
+        for (let image of review.Images) {
+            image = {
+                id: image.id,
+                imageableId: image.spotId,
+                url: image.url
+            }
+            arrImages.push(image)
+        }
+        review.Images = arrImages
+        arrReviewsResponse.push(review)
+    }
+    return res.json(arrReviewsResponse)
 })
 
 // add Image to a review based on the review id
