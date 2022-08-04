@@ -6,6 +6,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+// get all of the current user's bookings
 router.get('/current', restoreUser, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
@@ -51,4 +52,6 @@ router.get('/current', restoreUser, async (req, res, next) => {
 
     res.json({ Bookings: bookingsArr })
 })
+
+
 module.exports = router;
