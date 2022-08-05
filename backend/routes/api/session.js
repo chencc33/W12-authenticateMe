@@ -16,7 +16,7 @@ router.post(
     '/',
     async (req, res, next) => {
         const { credential, password } = req.body;
-
+        const csrfToken = req.csrfToken();
         const user = await User.login({ credential, password });
         if (!credential || !password) {
             res.status = 400
@@ -50,7 +50,7 @@ router.post(
             lastName: user.lastName,
             username: user.username,
             email: user.email,
-            token: ""
+            token: csrfToken
         }
         );
     }
