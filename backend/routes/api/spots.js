@@ -24,10 +24,18 @@ router.get('/', async (req, res, next) => {
         let spotReviewNum = await Review.count({ where: { spotId: spot.id } })
         let avgRating = spotReviewSum / spotReviewNum
         let imageUrl = await Image.findOne({ where: { spotId: spot.id }, attributes: ['url'] })
-        spot = {
-            ...spot.dataValues,
-            avgRating: avgRating,
-            previewImage: imageUrl.url
+        if (imageUrl) {
+            spot = {
+                ...spot.dataValues,
+                avgRating: avgRating,
+                previewImage: imageUrl.url
+            }
+        } else {
+            spot = {
+                ...spot.dataValues,
+                avgRating: avgRating,
+                previewImage: null
+            }
         }
         arrSpotResponse.push(spot)
     }
@@ -50,10 +58,18 @@ router.get('/current', restoreUser, async (req, res, next) => {
         let spotReviewNum = await Review.count({ where: { spotId: spot.id } })
         let avgRating = spotReviewSum / spotReviewNum
         let imageUrl = await Image.findOne({ where: { spotId: spot.id }, attributes: ['url'] })
-        spot = {
-            ...spot.dataValues,
-            avgRating: avgRating,
-            previewImage: imageUrl.url
+        if (imageUrl) {
+            spot = {
+                ...spot.dataValues,
+                avgRating: avgRating,
+                previewImage: imageUrl.url
+            }
+        } else {
+            spot = {
+                ...spot.dataValues,
+                avgRating: avgRating,
+                previewImage: null
+            }
         }
         arrSpotResponse.push(spot)
     }
