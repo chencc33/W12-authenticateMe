@@ -224,7 +224,7 @@ const validateReview = [
 ]
 
 //get all the reviews by a spot id
-// It is still spotId for imageableId
+
 router.get('/:spotId/reviews', async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId)
     if (!spot) {
@@ -323,6 +323,11 @@ router.get('/:spotId/bookings', restoreUser, async (req, res, next) => {
         include: { model: User, attributes: ['id', 'firstName', 'lastName'] }
     })
 
+    if (bookings.length === 0) {
+        res.status(404)
+        return res.json({ message: "no Booking of this spot" })
+    }
+
     let arrNormalUserResponse = []
     for (let booking of bookings) {
         let normalUserResponse = {
@@ -341,10 +346,10 @@ router.get('/:spotId/bookings', restoreUser, async (req, res, next) => {
 })
 
 //create a booking for a spotId
-router.post('/:spotId/bookings', restoreUser, async (req, res, next) => {
+router.post('/:spotIdForBooking/bookings', restoreUser, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
-    const spot = await Spot.findByPk(req.params.spotId)
+    const spot = await Spot.findByPk(req.params.spotIdForBooking)
     const { startDate, endDate } = req.body
 
     if (!spot) {
@@ -370,7 +375,7 @@ router.post('/:spotId/bookings', restoreUser, async (req, res, next) => {
     //check if the spot is available
     const currentBooking = await Booking.findAll({
         where: {
-            spotId: req.params.spotId,
+            spotId: req.params.spotIdForBooking,
             [Op.and]: [
                 { startDate: { [Op.lt]: endDate } },
                 { endDate: { [Op.gt]: startDate } }
@@ -391,7 +396,7 @@ router.post('/:spotId/bookings', restoreUser, async (req, res, next) => {
     } else {
         // create a new booking
         const newBooking = await Booking.create({
-            spotId: req.params.spotId,
+            spotId: req.params.spotIdForBooking,
             userId,
             startDate,
             endDate
