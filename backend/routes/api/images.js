@@ -3,7 +3,7 @@ const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth')
 const { User, Spot, Review, Image, Booking, sequelize } = require('../../db/models');
 const router = express.Router();
 
-router.delete('/:imageId', async (req, res, next) => {
+router.delete('/:reviewImageId', async (req, res, next) => {
     const deleteImage = await Image.findByPk(req.params.imageId)
     if (!deleteImage) {
         res.status(404)
@@ -12,6 +12,7 @@ router.delete('/:imageId', async (req, res, next) => {
             "statusCode": 404
         })
     } else {
+        await deleteImage.destroy()
         res.json({
             "message": "Successfully deleted",
             "statusCode": 200
