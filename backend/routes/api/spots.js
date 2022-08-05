@@ -241,7 +241,38 @@ router.get('/:spotId/reviews', async (req, res, next) => {
                 { model: Image, attributes: ['id', 'spotId', 'url'] }
             ]
         })
-        res.json(reviews)
+
+
+        let arrReviewsResponse = []
+
+        for (let i = 0; i < reviews.length; i++) {
+            let arrImages = []
+            for (let j = 0; j < reviews[i].Images.length; j++) {
+                let image = reviews[i].Images[j]
+                image = {
+                    id: image.id,
+                    imageableId: reviews[i].spotId,
+                    url: image.url
+                }
+
+                arrImages.push(image)
+            }
+            // res.json(arrImages)
+            reviews[i].Images = arrImages
+            reviews[i] = {
+                id: reviews[i].id,
+                userId: reviews[i].userId,
+                spotId: reviews[i].spotId,
+                review: reviews[i].review,
+                stars: reviews[i].stars,
+                createdAt: reviews[i].createdAt,
+                updatedAt: reviews[i].updatedAt,
+                User: reviews[i].User,
+                Images: reviews[i].Images
+            }
+            arrReviewsResponse.push(reviews[i])
+        }
+        return res.json(arrReviewsResponse)
     }
 })
 
