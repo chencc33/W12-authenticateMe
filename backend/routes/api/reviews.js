@@ -6,7 +6,8 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-//get all the reviews of the current user
+//get all the reviews of the current use
+// it is still spotId for imageableId
 router.get('/current', restoreUser, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
@@ -16,17 +17,15 @@ router.get('/current', restoreUser, async (req, res, next) => {
             { model: Spot, attributes: { exclude: ['createdAt', 'updatedAt'] } },
             { model: Image, attributes: ['id', 'spotId', 'url'] }
         ]
-        // raw: true
     })
-    // for (let review of reviews) {
-    //     const images = await review.getImages({ attributes: ['id', 'spotId', 'url'] })
-    //     review.Images = images
-    // }
-    // console.log(reviews)
+    // res.json(reviews)
+
     let arrReviewsResponse = []
-    let arrImages = []
-    for (let review of reviews) {
-        for (let image of review.Images) {
+
+    for (let i = 0; i < reviews.length; i++) {
+        let arrImages = []
+        for (let j = 0; j < reviews[i].Images.length; j++) {
+            let image = reviews[i].Images[j]
             image = {
                 id: image.id,
                 imageableId: image.spotId,
@@ -34,8 +33,20 @@ router.get('/current', restoreUser, async (req, res, next) => {
             }
             arrImages.push(image)
         }
-        review.Images = arrImages
-        arrReviewsResponse.push(review)
+        // res.json(arrImages)
+        reviews[i].Images = arrImages
+        reviews[i] = {
+            id: reviews[i].id,
+            userId: reviews[i].userId,
+            spotId: reviews[i].spotId,
+            review: reviews[i].review,
+            stars: reviews[i].stars,
+            createdAt: reviews[i].createdAt,
+            updatedAt: reviews[i].updatedAt,
+            User: reviews[i].User,
+            Images: reviews[i].Images
+        }
+        arrReviewsResponse.push(reviews[i])
     }
     return res.json(arrReviewsResponse)
 })

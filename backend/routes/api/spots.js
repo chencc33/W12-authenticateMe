@@ -213,6 +213,7 @@ const validateReview = [
 ]
 
 //get all the reviews by a spot id
+// It is still spotId for imageableId
 router.get('/:spotId/reviews', async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId)
     if (!spot) {
