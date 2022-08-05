@@ -71,19 +71,21 @@ router.post('/:reviewId/images', restoreUser, async (req, res, next) => {
             statusCode: 403
         })
     }
-    const image = await Image.findOne({
-        where: { reviewId: review.id }
-    })
-    const newImage = await image.update({
+    // const image = await Image.findOne({
+    //     where: { reviewId: req.params.reviewId }
+    // })
+    const newImage = await Image.create({
         url: url,
         previewImage: previewImage,
+        reviewId: review.id,
+        userId: userId
     })
     let newImageResponse = {
         id: newImage.id,
-        imageableId: review.id,
+        imageableId: req.params.reviewId,
         url: url
     }
-    res.json(newImageResponse)
+    return res.json(newImageResponse)
 })
 
 // edit a review
