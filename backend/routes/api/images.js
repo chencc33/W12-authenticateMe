@@ -4,7 +4,7 @@ const { User, Spot, Review, Image, Booking, sequelize } = require('../../db/mode
 const router = express.Router();
 
 router.delete('/:reviewImageId', async (req, res, next) => {
-    const deleteImage = await Image.findByPk(req.params.imageId)
+    const deleteImage = await Image.findByPk(req.params.reviewImageId)
     if (!deleteImage) {
         res.status(404)
         res.json({
