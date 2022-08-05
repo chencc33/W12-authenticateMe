@@ -55,7 +55,7 @@ router.post('/:reviewId/images', restoreUser, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
     const { url, previewImage } = req.body
-    const review = await Review.findByPk(req.params.reviewId)
+    const review = await Review.findOne({ where: { id: req.params.reviewId } })
     if (!review) {
         res.status(404)
         return res.json({
