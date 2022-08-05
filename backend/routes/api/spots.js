@@ -9,8 +9,15 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 // get all spots
 router.get('/', async (req, res, next) => {
-
-    const spots = await Spot.findAll()
+    let { page, size } = req.query
+    if (!page) page = 1
+    if (!size) size = 20
+    page = parseInt(page)
+    size = parseInt(size)
+    const spots = await Spot.findAll({
+        limit: size,
+        offset: size * (page - 1)
+    })
     let arrSpotResponse = []
     for (let spot of spots) {
         let spotReviewSum = await Review.sum('stars', { where: { spotId: spot.id } })
@@ -24,7 +31,11 @@ router.get('/', async (req, res, next) => {
         }
         arrSpotResponse.push(spot)
     }
-    res.json(arrSpotResponse)
+    res.json({
+        Spots: arrSpotResponse,
+        page: page,
+        size: size
+    })
 })
 
 // get all spots by current user

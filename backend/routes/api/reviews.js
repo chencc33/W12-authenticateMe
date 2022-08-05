@@ -7,7 +7,6 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 //get all the reviews of the current use
-// it is still spotId for imageableId
 router.get('/current', restoreUser, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
