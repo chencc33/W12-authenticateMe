@@ -13,6 +13,7 @@ router.get('/current', restoreUser, async (req, res, next) => {
     const userId = user.toSafeObject().id
 
     const bookings = await Booking.findAll({
+        where: { userId: userId },
         include: [
             { model: User, attributes: [] },
             {
