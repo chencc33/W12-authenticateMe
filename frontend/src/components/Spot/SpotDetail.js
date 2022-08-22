@@ -1,18 +1,22 @@
 import { getOneSpot } from '../../store/spot'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
-const SpotDetail = (spotId) => {
+const SpotDetail = () => {
+    const { spotId } = useParams()
     const dispatch = useDispatch()
     const oneSpot = useSelector((state) => state.spots)
-    console.log('*****oneSpot from component******', oneSpot)
+    console.log('*****from component******', oneSpot[spotId])
+    // console.log('address', address)
 
     useEffect(() => {
-        dispatch(getOneSpot(oneSpot))
-    }, [dispatch])
+        dispatch(getOneSpot(spotId))
+    }, [dispatch, spotId])
+
     return (
         <>
-            Haaaa
+            {oneSpot[spotId].city}
         </>
     )
 }

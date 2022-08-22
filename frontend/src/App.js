@@ -24,11 +24,11 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path='/spots/current'>
-            <SpotListByUser />
-          </Route>
           <Route path='/spots/:spotId'>
             <SpotDetail />
+          </Route>
+          <Route exact path='/spots/current'>
+            <SpotListByUser />
           </Route>
           <Route exact path='/spots'>
             <SpotList />

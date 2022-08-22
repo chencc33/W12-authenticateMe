@@ -60,10 +60,11 @@ export const getAllSpotsByUser = () => async dispatch => {
 
 //Get One Spot by Spot Id
 export const getOneSpot = (spotId) => async dispatch => {
+    // console.log('***spotId***', spotId)
     const response = await fetch(`/api/spots/${spotId}`)
     if (response.ok) {
         const spot = await response.json()
-        console.log('*****Spot From thunk****', spot)
+        // console.log('*****Spot From thunk****', spot)
         dispatch(loadOneSpotAction(spot))
         return spot
     }
@@ -88,12 +89,14 @@ const spotReducer = (state = initialState, action) => {
             spotsByUserArr.forEach((spot) => {
                 allSpotByUserObj[spot.id] = spot
             })
-            console.log('***spotArr***', allSpotByUserObj)
+            // console.log('***spotArr***', allSpotByUserObj)
             return { ...allSpotByUserObj }
         case LOAD_ONE_SPOT:
             const spotObj = {}
             const spotArr = action.spot
-            console.log('****oneSpot*****', spotArr)
+            spotObj[spotArr.id] = spotArr
+            return { ...spotObj }
+        // console.log('****oneSpot in Reducer*****', spotObj)
         default:
             return state
     }
