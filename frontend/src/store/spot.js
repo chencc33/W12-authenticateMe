@@ -39,7 +39,7 @@ const deleteSpotAction = spot => ({
 
 //Get All Spots Thunk
 export const getAllSpots = () => async dispatch => {
-    const response = await fetch(`/api/spots`)
+    const response = await csrfFetch(`/api/spots`)
 
     if (response.ok) {
         const spots = await response.json()
@@ -61,12 +61,36 @@ export const getAllSpotsByUser = () => async dispatch => {
 //Get One Spot by Spot Id
 export const getOneSpot = (spotId) => async dispatch => {
     // console.log('***spotId***', spotId)
-    const response = await fetch(`/api/spots/${spotId}`)
+    const response = await csrfFetch(`/api/spots/${spotId}`)
     if (response.ok) {
         const spot = await response.json()
         // console.log('*****Spot From thunk****', spot)
         dispatch(loadOneSpotAction(spot))
         return spot
+    }
+}
+
+// Create One spot
+export const createOneSpot = (data) => async dispatch => {
+    const response = await csrfFetch(`/api/spots`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+
+    if (response.ok) {
+        const spot = await response.json()
+        // console.log('***from thunk***', spot)
+        dispatch(addSpotAction(spot))
+        return spot
+    }
+}
+
+// Delete one Spot
+export const deleteOneSpot = (spot) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/:spotId`)
+    if (response.ok) {
+        dispatch(deleteOneSpot(spot))
     }
 }
 
@@ -97,6 +121,13 @@ const spotReducer = (state = initialState, action) => {
             spotObj[spotArr.id] = spotArr
             return { ...spotObj }
         // console.log('****oneSpot in Reducer*****', spotObj)
+        case ADD_ONE:
+            const newState = { ...state, [action.spot.id]: action.spot }
+            return newState
+        case DELTE_ONE:
+            let copyState = { ...state }
+            delete copyState[action.spot.id]
+            return copyState
         default:
             return state
     }
