@@ -7,16 +7,16 @@ const SpotDetail = () => {
     const { spotId } = useParams()
     const dispatch = useDispatch()
     const oneSpot = useSelector((state) => state.spots)
-    console.log('*****from component******', oneSpot[spotId])
-    // console.log('address', address)
-
+    const targetSpot = oneSpot[spotId]
+    // console.log('*****from component******', oneSpot[spotId])
     useEffect(() => {
         dispatch(getOneSpot(spotId))
     }, [dispatch, spotId])
 
+    if (!targetSpot) return null
     return (
         <>
-            {oneSpot[spotId].city}
+            {targetSpot.city}
         </>
     )
 }
