@@ -12,7 +12,6 @@ const SpotList = () => {
     const [showForm, setShowForm] = useState(false)
     // console.log('spots from useSlector', spots)
     // console.log('spotArr in component', spotsArr)
-    // spotsArr.map(({ id, address }) => (console.log('address', address)))
 
     useEffect(() => {
         dispatch(getAllSpots())
@@ -31,6 +30,8 @@ const SpotList = () => {
                     </div>
                 ))}
             </div>
+            <div className='button' hidden={showForm} onClick={() => setShowForm(true)}>Create a New Spot</div>
+            {showForm ? <CreateSpotForm /> : null}
         </>
     )
 }
