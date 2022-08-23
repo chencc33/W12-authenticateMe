@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CreateSpotForm from './CreateSpotForm'
+import './SpotList.css'
 
 const SpotList = () => {
     const dispatch = useDispatch()
@@ -10,7 +11,7 @@ const SpotList = () => {
     const spotsArr = Object.values(spots)
     const [showForm, setShowForm] = useState(false)
     // console.log('spots from useSlector', spots)
-    // console.log('spotArr in component', spotsArr)
+    console.log('spotArr in component', spotsArr)
     // spotsArr.map(({ id, address }) => (console.log('address', address)))
 
     useEffect(() => {
@@ -19,11 +20,17 @@ const SpotList = () => {
     if (!spotsArr.length) return null
     return (
         <>
-            <div>
-                {spotsArr.map(({ id, address }) => (<Link key={id} to='/spots/id'>{address}</Link>))}
+            <div className='grid'>
+                {spotsArr.map(({ id, address, avgRating, city, state, statedescription, name, previewImage, price }) => (
+                    <div className='item' key={id}>
+                        <img src={previewImage} alt="PreviewImage" />
+                        <div>{state}</div>
+                        <Link to={`/spots/${id}`}>
+                            {city}{address}
+                        </Link>
+                    </div>
+                ))}
             </div>
-            {/* <button onClick={() => setShowForm(true)}>Create New Spot</button>
-            {showForm && (<CreateSpotForm />)} */}
         </>
     )
 }
