@@ -11,7 +11,7 @@ const SpotList = () => {
     const spotsArr = Object.values(spots)
     const [showForm, setShowForm] = useState(false)
     // console.log('spots from useSlector', spots)
-    console.log('spotArr in component', spotsArr)
+    // console.log('spotArr in component', spotsArr)
     // spotsArr.map(({ id, address }) => (console.log('address', address)))
 
     useEffect(() => {

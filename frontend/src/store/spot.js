@@ -114,7 +114,7 @@ const spotReducer = (state = initialState, action) => {
             spotsByUserArr.forEach((spot) => {
                 allSpotByUserObj[spot.id] = spot
             })
-            // console.log('***spotArr***', allSpotByUserObj)
+            // console.log('***spotObjByUser from reducer***', allSpotByUserObj)
             return { ...allSpotByUserObj }
         case LOAD_ONE_SPOT:
             const spotObj = {}
