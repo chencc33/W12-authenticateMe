@@ -7,7 +7,7 @@ const ReviewListByUser = () => {
     const dispatch = useDispatch()
     const reviewObjByUser = useSelector((state) => state.reviews)
     const reviewByUserArr = Object.values(reviewObjByUser)
-    console.log('****reviewObj from component****', reviewByUserArr)
+    // console.log('****reviewObj from component****', reviewByUserArr)
 
     useEffect(() => {
         dispatch(getReviewByUser())
