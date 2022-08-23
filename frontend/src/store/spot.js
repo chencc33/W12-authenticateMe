@@ -5,6 +5,7 @@ const LOAD_SPOT_USER = 'spots/getSpotsByUser'
 const LOAD_ONE_SPOT = 'spot/getOneSpot'
 const ADD_ONE = 'spots/addOneSpot'
 const UPDATE_ONE = 'spot/updateOneSpot'
+const ADD_IMAGE = 'spot/addImageToSpot'
 const DELTE_ONE = 'spot/deleteOneSpot'
 
 const loadSpotsAction = spots => ({
@@ -32,9 +33,14 @@ const updateSpotAction = spot => ({
     spot
 })
 
-const deleteSpotAction = spot => ({
-    type: DELTE_ONE,
+const addImageAction = spot => ({
+    type: ADD_IMAGE,
     spot
+})
+
+const deleteSpotAction = spotId => ({
+    type: DELTE_ONE,
+    spotId
 })
 
 //Get All Spots Thunk
@@ -86,12 +92,43 @@ export const createOneSpot = (data) => async dispatch => {
     }
 }
 
-// Delete one Spot
-export const deleteOneSpot = (spotId) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${spotId}`)
+//Update Spot
+export const updateOneSpot = (data) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${data.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+
     if (response.ok) {
         const spot = await response.json()
-        dispatch(deleteOneSpot(spot))
+        // console.log('***from thunk***', spot)
+        dispatch(updateSpotAction(spot))
+        return spot
+    }
+}
+
+// Delete one Spot
+export const deleteOneSpot = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+    })
+    if (response.ok) {
+        const spot = await response.json()
+        dispatch(deleteSpotAction(spotId))
+    }
+}
+
+//Add Image Thunk
+export const addImageToSpot = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+    })
+    if (response.ok) {
+        const spot = await response.json()
+        dispatch(addImageAction(spot))
     }
 }
 
@@ -123,12 +160,22 @@ const spotReducer = (state = initialState, action) => {
             return { ...spotObj }
         // console.log('****oneSpot in Reducer*****', spotObj)
         case ADD_ONE:
-            const newState = { ...state, [action.spot.id]: action.spot }
+            let newState = { ...state }
+            newState[action.spot.id] = action.spot
+            // const newState = { ...state, [action.spot.id]: action.spot }
+            console.log('**add one from reducer**', newState)
             return newState
+        case UPDATE_ONE:
+            let updateState = { ...state }
+            updateState[action.spot.id] = action.spot
+            return updateState
         case DELTE_ONE:
             let copyState = { ...state }
-            delete copyState[action.spot.id]
+            delete copyState[action.spotId]
             return copyState
+        case ADD_IMAGE:
+            let addImageState = { ...state }
+            console.log('***addImageState from reducer***', addImageState)
         default:
             return state
     }

@@ -95,10 +95,19 @@ router.get('/:spotId', async (req, res, next) => {
     const avgStarRating = sumRating / numReviews
     let owners = await User.findOne({ where: spot.ownerId, attributes: ['id', 'firstName', 'lastName'] })
     let imageData = images
-    imageData = {
-        id: images[0].id,
-        imageableId: spot.id,
-        url: images[0].url
+    // condition for spots don't have images
+    if (imageData.length) {
+        imageData = {
+            id: images[0].id,
+            imageableId: spot.id,
+            url: images[0].url
+        }
+    } else {
+        imageData = {
+            id: null,
+            imageableId: spot.id,
+            url: null
+        }
     }
     let spotResponse = {
         id: spot.id,
