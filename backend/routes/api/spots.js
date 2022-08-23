@@ -308,21 +308,21 @@ router.post('/:spotId/reviews', validateReview, async (req, res, next) => {
     const { review, stars } = req.body
     const reviews = await Review.findAll({ where: { spotId: req.params.spotId } })
     const spot = await Spot.findByPk(req.params.spotId)
-    const newReivew = await Review.create({
-        userId: userId,
-        spotId: req.params.spotId,
-        review: review,
-        stars: stars
-    })
     for (let review of reviews) {
         if (review.userId === userId) {
-            res.status(403)
+            // res.status(403)
             return res.json({
                 "message": "User already has a review for this spot",
                 "statusCode": 403
             })
         }
     }
+    const newReivew = await Review.create({
+        userId: userId,
+        spotId: req.params.spotId,
+        review: review,
+        stars: stars
+    })
     if (!spot) {
         res.status(404)
         res.json({
