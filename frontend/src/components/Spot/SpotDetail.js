@@ -75,8 +75,8 @@ const SpotDetail = () => {
             )} */}
             <div onClick={() => setShowEditForm(true)} className='button'>Edit</div>
             {showEditForm ? <EditSpotForm /> : null}
-            <button onClick={() => {
-                dispatch(deleteOneSpot(spotId))
+            <button onClick={async () => {
+                await dispatch(deleteOneSpot(spotId))
                 history.push('/spots')
             }}>Delete</button>
         </>
