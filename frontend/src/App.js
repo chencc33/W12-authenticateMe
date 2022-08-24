@@ -42,11 +42,11 @@ function App() {
           <Route path='/spots/:spotId'>
             <SpotDetail />
           </Route>
-          <Route path='/reviews/:reviewId'>
-            <ReviewDetail />
-          </Route>
           <Route exact path='/reviews/current'>
             <ReviewListByUser />
+          </Route>
+          <Route path='/reviews/:reviewId'>
+            <ReviewDetail />
           </Route>
         </Switch>
       )}
