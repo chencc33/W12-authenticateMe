@@ -21,6 +21,7 @@ const SpotForm = ({ spot, formType }) => {
     const [validationErrors, setValidationErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
     // const [showForm, setShowForm] = useState(false)
+    const user = useSelector((state) => state.session.user)
 
     useEffect(() => {
         let errors = []
@@ -132,7 +133,9 @@ const SpotForm = ({ spot, formType }) => {
                         onChange={(e) => setPrice(e.target.value)} />
                 </label>
             </form>
-            <div onClick={handleSubmit} className='button' value={formType}>{formType}</div>
+            {user.id && (
+                <div onClick={handleSubmit} className='button' value={formType}>{formType}</div>
+            )}
         </section>
     )
 }
