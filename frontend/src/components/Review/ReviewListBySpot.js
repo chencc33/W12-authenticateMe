@@ -12,12 +12,12 @@ const ReviewListBySpot = () => {
     const reviewsObj = useSelector((state) => state.reviews)
     const reviewsArr = Object.values(reviewsObj)
     const logInUserId = useSelector((state) => state.session.user.id)
-    // console.log('***currentUserId***', typeof logInUserId)
+    console.log('***currentUserId***', logInUserId)
 
     const [review, setReview] = useState("")
     const [stars, setStars] = useState(5)
     const [showForm, setShowForm] = useState(false)
-    const [showButton, setShowButton] = useState(true)
+
     // console.log('****from component****', reviewsArr)
 
 
@@ -25,11 +25,10 @@ const ReviewListBySpot = () => {
         dispatch(getReviewBySpot(spotId))
     }, [dispatch, spotId])
 
-    useEffect(() => {
-        for (let review of reviewsArr) {
-            if (review.userId == logInUserId) { setShowButton(false) }
-        }
-    }, [showButton])
+    let showButton = true
+    for (let review of reviewsArr) {
+        if (review.userId == logInUserId) { showButton = false }
+    }
 
     const handleSubmit = async (e) => {
         const data = { review, stars }
