@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom'
 import { createOneSpot } from '../../store/spot'
 import './SpotDetail.css'
 import EditSpotForm from './EditSpotForm'
+import ReviewListBySpot from '../Review/ReviewListBySpot'
 
 const SpotDetail = () => {
     const { spotId } = useParams()
@@ -24,26 +25,6 @@ const SpotDetail = () => {
     if (!targetSpot) return null
     return (
         <>
-            {/* <div>
-                <div>
-                    <img src={targetSpot.Images.url || 'https://whetstonefire.org/wp-content/uploads/2020/06/image-not-available.jpg'} alt='Preview Image' />
-                </div>
-                <div>
-                    {targetSpot.name}
-                </div>
-                <div>
-                    Description: {targetSpot.description}
-                </div>
-                <div>
-                    Price: {targetSpot.price}
-                </div>
-                <div>
-                    {targetSpot.avgRating}
-                </div>
-                <div>
-                    {targetSpot.city}, {targetSpot.state}
-                </div>
-            </div> */}
             {!showEditForm && (
                 <>
                     <div>
@@ -86,6 +67,12 @@ const SpotDetail = () => {
                 await dispatch(deleteOneSpot(spotId))
                 history.push('/spots')
             }}>Delete</button>
+            <div>
+                <h2>Reviews</h2>
+                <div>
+                    <ReviewListBySpot spotId={spotId} />
+                </div>
+            </div>
         </>
     )
 }

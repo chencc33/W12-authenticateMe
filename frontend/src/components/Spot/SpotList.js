@@ -22,7 +22,7 @@ const SpotList = () => {
             <div className='grid'>
                 {spotsArr.map(({ id, address, avgRating, city, state, statedescription, name, previewImage, price }) => (
                     <div className='item' key={id}>
-                        <img src={previewImage} alt="PreviewImage" />
+                        <img src={previewImage || 'https://whetstonefire.org/wp-content/uploads/2020/06/image-not-available.jpg'} alt="PreviewImage" />
                         <div>{state}</div>
                         <Link to={`/spots/${id}`}>
                             {city}{address}
