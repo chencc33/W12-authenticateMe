@@ -15,7 +15,8 @@ const CreateSpotForm = () => {
         lng: '',
         name: '',
         description: '',
-        price: ''
+        price: '',
+        previewImage: ''
     }
     return (
         <SpotForm spot={spot} formType='Create Spot' />

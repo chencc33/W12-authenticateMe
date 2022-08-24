@@ -24,19 +24,23 @@ router.get('/', async (req, res, next) => {
         let spotReviewNum = await Review.count({ where: { spotId: spot.id } })
         let avgRating = spotReviewSum / spotReviewNum
         let imageUrl = await Image.findOne({ where: { spotId: spot.id }, attributes: ['url'] })
-        if (imageUrl) {
-            spot = {
-                ...spot.dataValues,
-                avgRating: avgRating,
-                previewImage: imageUrl.url
-            }
-        } else {
-            spot = {
-                ...spot.dataValues,
-                avgRating: avgRating,
-                previewImage: null
-            }
+        spot = {
+            ...spot.dataValues,
+            avgRating: avgRating
         }
+        // if (imageUrl) {
+        //     spot = {
+        //         ...spot.dataValues,
+        //         avgRating: avgRating,
+        //         previewImage: imageUrl.url
+        //     }
+        // } else {
+        //     spot = {
+        //         ...spot.dataValues,
+        //         avgRating: avgRating,
+        //         previewImage: null
+        //     }
+        // }
         arrSpotResponse.push(spot)
     }
     res.json({
@@ -57,20 +61,24 @@ router.get('/current', restoreUser, async (req, res, next) => {
         let spotReviewSum = await Review.sum('stars', { where: { spotId: spot.id } })
         let spotReviewNum = await Review.count({ where: { spotId: spot.id } })
         let avgRating = spotReviewSum / spotReviewNum
-        let imageUrl = await Image.findOne({ where: { spotId: spot.id }, attributes: ['url'] })
-        if (imageUrl) {
-            spot = {
-                ...spot.dataValues,
-                avgRating: avgRating,
-                previewImage: imageUrl.url
-            }
-        } else {
-            spot = {
-                ...spot.dataValues,
-                avgRating: avgRating,
-                previewImage: null
-            }
+        // let imageUrl = await Image.findOne({ where: { spotId: spot.id }, attributes: ['url'] })
+        spot = {
+            ...spot.dataValues,
+            avgRating: avgRating,
         }
+        // if (imageUrl) {
+        //     spot = {
+        //         ...spot.dataValues,
+        //         avgRating: avgRating,
+        //         previewImage: imageUrl.url
+        //     }
+        // } else {
+        //     spot = {
+        //         ...spot.dataValues,
+        //         avgRating: avgRating,
+        //         previewImage: null
+        //     }
+        // }
         arrSpotResponse.push(spot)
     }
     res.json(arrSpotResponse)
@@ -94,21 +102,21 @@ router.get('/:spotId', async (req, res, next) => {
     const numReviews = await Review.count({ where: { spotId: req.params.spotId } })
     const avgStarRating = sumRating / numReviews
     let owners = await User.findOne({ where: spot.ownerId, attributes: ['id', 'firstName', 'lastName'] })
-    let imageData = images
-    // condition for spots don't have images
-    if (imageData.length) {
-        imageData = {
-            id: images[0].id,
-            imageableId: spot.id,
-            url: images[0].url
-        }
-    } else {
-        imageData = {
-            id: null,
-            imageableId: spot.id,
-            url: null
-        }
-    }
+    // let imageData = images
+    // // condition for spots don't have images
+    // if (imageData.length) {
+    //     imageData = {
+    //         id: images[0].id,
+    //         imageableId: spot.id,
+    //         url: images[0].url
+    //     }
+    // } else {
+    //     imageData = {
+    //         id: null,
+    //         imageableId: spot.id,
+    //         url: null
+    //     }
+    // }
     let spotResponse = {
         id: spot.id,
         ownerId: spot.ownerId,
@@ -121,11 +129,12 @@ router.get('/:spotId', async (req, res, next) => {
         name: spot.name,
         description: spot.description,
         price: spot.price,
+        previewImage: spot.previewImage,
         createdAt: spot.createdAt,
         updatedAt: spot.updatedAt,
         numReviews: numReviews,
         avgStarRating: avgStarRating,
-        Images: imageData,
+        // Images: imageData,
         Owner: owners
     }
     return res.json(spotResponse)
@@ -163,9 +172,9 @@ const validateSpot = [
 router.post('/', validateSpot, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
-    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body
     const newSpot = await Spot.create({
-        ownerId: userId, address, city, state, country, lat, lng, name, description, price
+        ownerId: userId, address, city, state, country, lat, lng, name, description, price, previewImage
     })
     const newSpotInfo = await Spot.findByPk(newSpot.id)
     res.json(newSpotInfo)
@@ -201,7 +210,7 @@ router.post('/:spotId/images', async (req, res, next) => {
 router.put('/:spotId', restoreUser, validateSpot, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
-    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body
     const editSpot = await Spot.findByPk(req.params.spotId)
     if (!editSpot) {
         res.status(404)

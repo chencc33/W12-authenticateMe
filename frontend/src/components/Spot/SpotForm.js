@@ -18,6 +18,7 @@ const SpotForm = ({ spot, formType }) => {
     const [name, setName] = useState(spot.name)
     const [description, setDescription] = useState(spot.description)
     const [price, setPrice] = useState(spot.price)
+    const [previewImage, setPreviewImage] = useState(spot.previewImage)
     const [validationErrors, setValidationErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
     // const [showForm, setShowForm] = useState(false)
@@ -34,15 +35,19 @@ const SpotForm = ({ spot, formType }) => {
         if (!name.length) errors.push('Please provide the spot name')
         if (!description.length) errors.push('Please provide the spot description')
         if (!Number.isInteger(parseInt(price))) errors.push('Please provide the price as integer')
+        if (!previewImage.length) errors.push('Please provide a a valid image url')
         setValidationErrors(errors)
-    }, [address, city, state, country, lat, lng, name, description, price])
+    }, [address, city, state, country, lat, lng, name, description, price, previewImage])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setHasSubmitted(true)
+        // console.log('*****spot from spot form *****', spot)
+        // console.log('*****from spot form *****', previewImage)
         const data = {
-            ...spot, address, city, state, country, lat, lng, name, description, price
+            ...spot, address, city, state, country, lat, lng, name, description, price, previewImage
         }
+        // console.log('*****spot from spot form *****', spot)
         if (formType === 'Create Spot') {
             const newSpot = await dispatch(createOneSpot(data))
             if (newSpot) {
@@ -137,6 +142,14 @@ const SpotForm = ({ spot, formType }) => {
                         value={price}
                         placeholder='Price'
                         onChange={(e) => setPrice(e.target.value)} />
+                </label>
+                <label>
+                    Image Url
+                    <input
+                        type='imageUrl'
+                        value={previewImage}
+                        placeholder='Image Url'
+                        onChange={(e) => setPreviewImage(e.target.value)} />
                 </label>
             </form>
             {user.id && (

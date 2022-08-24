@@ -11,7 +11,7 @@ const SpotList = () => {
     const spotsArr = Object.values(spots)
     const [showForm, setShowForm] = useState(false)
     // console.log('spots from useSlector', spots)
-    // console.log('spotArr in component', spotsArr)
+    console.log('spotArr in component', spotsArr)
 
     useEffect(() => {
         dispatch(getAllSpots())
@@ -22,7 +22,7 @@ const SpotList = () => {
             <div className='grid'>
                 {spotsArr.map(({ id, address, avgRating, city, state, statedescription, name, previewImage, price }) => (
                     <div className='item' key={id}>
-                        <img src={previewImage || 'https://whetstonefire.org/wp-content/uploads/2020/06/image-not-available.jpg'} alt="PreviewImage" />
+                        <img src={previewImage} alt="PreviewImage" />
                         <div>{state}</div>
                         <Link to={`/spots/${id}`}>
                             {city}{address}

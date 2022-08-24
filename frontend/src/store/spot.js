@@ -144,7 +144,6 @@ const spotReducer = (state = initialState, action) => {
         case ADD_ONE:
             let newState = { ...state }
             newState[action.spot.id] = action.spot
-            // const newState = { ...state, [action.spot.id]: action.spot }
             console.log('**add one from reducer**', newState)
             return newState
         case UPDATE_ONE:

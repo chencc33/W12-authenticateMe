@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
     lng: DataTypes.DECIMAL,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    price: DataTypes.INTEGER
+    price: DataTypes.INTEGER,
+    previewImage: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Spot',

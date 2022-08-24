@@ -64,12 +64,12 @@ export const createReview = (data, spotId) => async dispatch => {
 
 //thunk: delete a review
 export const deleteReview = (reviewId) => async dispatch => {
-    console.log('***test1***')
+    // console.log('***test1***')
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     })
-    console.log('***test2***')
+    // console.log('***test2***')
     if (response.ok) {
         const review = await response.json()
         dispatch(deleteReivewAction(reviewId))

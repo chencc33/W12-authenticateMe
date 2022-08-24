@@ -17,7 +17,7 @@ const SpotDetail = () => {
     const targetSpot = oneSpot[spotId]
     console.log('***target Spot from component ****', targetSpot)
     const [showEditForm, setShowEditForm] = useState(false)
-    // console.log('*****from component******', oneSpot[spotId])
+    console.log('*****from component******', targetSpot.previewImage)
     useEffect(() => {
         dispatch(getOneSpot(spotId))
     }, [dispatch, spotId])
@@ -29,7 +29,7 @@ const SpotDetail = () => {
                 <>
                     <div>
                         <div>
-                            <img src={targetSpot?.Images?.url || 'https://whetstonefire.org/wp-content/uploads/2020/06/image-not-available.jpg'} alt='Preview Image' />
+                            <img src={targetSpot.previewImage} alt='Preview Image' />
                         </div>
                         <div>
                             {targetSpot.name}

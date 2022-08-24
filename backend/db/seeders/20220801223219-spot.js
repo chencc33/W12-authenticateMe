@@ -23,6 +23,7 @@ module.exports = {
         name: "App Academy",
         description: "Place where web developers are created",
         price: 123,
+        previewImage: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8aG91c2V8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
       },
       {
         ownerId: 1,
@@ -35,6 +36,7 @@ module.exports = {
         name: "App Academy clone",
         description: "Nice Place",
         price: 145,
+        previewImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
       }
     ])
   },
