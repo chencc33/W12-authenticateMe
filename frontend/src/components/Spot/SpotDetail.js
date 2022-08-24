@@ -14,24 +14,19 @@ const SpotDetail = () => {
     const history = useHistory()
     const oneSpot = useSelector((state) => state.spots)
     const targetSpot = oneSpot[spotId]
-    // console.log('***target Spot from component ****', targetSpot)
+    console.log('***target Spot from component ****', targetSpot)
     const [showEditForm, setShowEditForm] = useState(false)
     // console.log('*****from component******', oneSpot[spotId])
     useEffect(() => {
         dispatch(getOneSpot(spotId))
     }, [dispatch, spotId])
 
-    // const handleDelete = (e) => {
-    //     dispatch(deleteOneSpot(spotId))
-    //     // history.push('/spots')
-    // }
-
     if (!targetSpot) return null
     return (
         <>
-            <div>
+            {/* <div>
                 <div>
-                    <img src={targetSpot.previewImage} alt='Preview Image' />
+                    <img src={targetSpot.Images.url || 'https://whetstonefire.org/wp-content/uploads/2020/06/image-not-available.jpg'} alt='Preview Image' />
                 </div>
                 <div>
                     {targetSpot.name}
@@ -48,15 +43,27 @@ const SpotDetail = () => {
                 <div>
                     {targetSpot.city}, {targetSpot.state}
                 </div>
-            </div>
-            {/* {!showEditForm && (
+            </div> */}
+            {!showEditForm && (
                 <>
                     <div>
                         <div>
-                            <img src={targetSpot.previewImage} alt='Preview Image' />
+                            <img src={targetSpot?.Images?.url || 'https://whetstonefire.org/wp-content/uploads/2020/06/image-not-available.jpg'} alt='Preview Image' />
                         </div>
                         <div>
                             {targetSpot.name}
+                        </div>
+                        <div>
+                            Address: {targetSpot.address}
+                        </div>
+                        <div>
+                            City: {targetSpot.city}
+                        </div>
+                        <div>
+                            State: {targetSpot.state}
+                        </div>
+                        <div>
+                            Country: {targetSpot.country}
                         </div>
                         <div>
                             Description: {targetSpot.description}
@@ -72,7 +79,7 @@ const SpotDetail = () => {
                         </div>
                     </div>
                 </>
-            )} */}
+            )}
             <div onClick={() => setShowEditForm(true)} className='button'>Edit</div>
             {showEditForm ? <EditSpotForm /> : null}
             <button onClick={async () => {

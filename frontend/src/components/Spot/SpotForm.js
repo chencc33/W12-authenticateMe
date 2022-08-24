@@ -29,25 +29,30 @@ const SpotForm = ({ spot, formType }) => {
         if (!city.length) errors.push('Please provide your city')
         if (!state.length) errors.push('Please provide your state')
         if (!country.length) errors.push('Please provide the country')
-        if (!lat.length) errors.push('Please provide the latitude')
-        if (!lng.length) errors.push('Please provide the longitude')
+        if (!lat) errors.push('Please provide the latitude')
+        if (!lng) errors.push('Please provide the longitude')
         if (!name.length) errors.push('Please provide the spot name')
         if (!description.length) errors.push('Please provide the spot description')
-        if (!Number.isInteger(price)) errors.push('Please provide the price as integer')
+        if (!Number.isInteger(parseInt(price))) errors.push('Please provide the price as integer')
         setValidationErrors(errors)
     }, [address, city, state, country, lat, lng, name, description, price])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setHasSubmitted(true)
-        const data = { ...spot, address, city, state, country, lat, lng, name, description, price }
+        const data = {
+            ...spot, address, city, state, country, lat, lng, name, description, price
+        }
         if (formType === 'Create Spot') {
             const newSpot = await dispatch(createOneSpot(data))
             if (newSpot) {
                 history.push(`/spots/${newSpot.id}`)
             }
         } else {
-            await dispatch(updateOneSpot(data))
+            const updateSpot = await dispatch(updateOneSpot(data))
+            if (updateSpot) {
+                history.push(`/spots`)
+            }
         }
     }
 
@@ -126,6 +131,7 @@ const SpotForm = ({ spot, formType }) => {
                         onChange={(e) => setDescription(e.target.value)} />
                 </label>
                 <label>
+                    Price
                     <input
                         type='price'
                         value={price}
