@@ -7,10 +7,10 @@ import Navigation from "./components/Navigation";
 import SpotList from "./components/Spot/SpotList";
 import SpotListByUser from "./components/Spot/SpotListByUser";
 import SpotDetail from "./components/Spot/SpotDetail";
-import CreateSpotForm from "./components/Spot/CreateSpotForm";
 import ReviewListByUser from "./components/Review/ReviewListByUser";
 import ReviewListBySpot from "./components/Review/ReviewListBySpot";
 import ReviewDetail from "./components/Review/ReviewDetail";
+import CreateSpotForm from "./components/Spot/CreateSpotForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +35,9 @@ function App() {
           </Route>
           <Route exact path='/spots/current'>
             <SpotListByUser />
+          </Route>
+          <Route exact path='/spots/create'>
+            <CreateSpotForm />
           </Route>
           <Route path='/spots/:spotId/reviews'>
             <ReviewListBySpot />

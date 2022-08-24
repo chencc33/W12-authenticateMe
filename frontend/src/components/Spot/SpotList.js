@@ -1,7 +1,6 @@
 import { getAllSpots } from '../../store/spot'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import CreateSpotForm from './CreateSpotForm'
 import './SpotList.css'
 import { useHistory } from 'react-router-dom'
@@ -13,7 +12,7 @@ const SpotList = () => {
     const spotsArr = Object.values(spots)
     const [showForm, setShowForm] = useState(false)
     // console.log('spots from useSlector', spots)
-    console.log('spotArr in component', spotsArr)
+    // console.log('spotArr in component', spotsArr)
 
     useEffect(() => {
         dispatch(getAllSpots())
@@ -39,8 +38,8 @@ const SpotList = () => {
                     </div>
                 ))}
             </div>
-            <div className='button' hidden={showForm} onClick={() => setShowForm(true)}>Create a New Spot</div>
-            {showForm ? <CreateSpotForm /> : null}
+            {/* <div className='button' hidden={showForm} onClick={() => setShowForm(true)}>Create a New Spot</div>
+            {showForm ? <CreateSpotForm /> : null} */}
         </>
     )
 }

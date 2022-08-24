@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createOneSpot } from '../../store/spot';
 import { updateOneSpot } from '../../store/spot';
+import './SpotForm.css'
 
 
 const SpotForm = ({ spot, formType }) => {
@@ -71,90 +72,108 @@ const SpotForm = ({ spot, formType }) => {
                 </ul>
             )}
             <form>
-                <label>
-                    Address
-                    <input
-                        type='address'
-                        value={address}
-                        placeholder='Address'
-                        onChange={(e) => setAddress(e.target.value)} />
-                </label>
-                <label>
-                    City
-                    <input
-                        type='city'
-                        value={city}
-                        placeholder='City'
-                        onChange={(e) => setCity(e.target.value)} />
-                </label>
-                <label>
-                    State
-                    <input
-                        type='state'
-                        value={state}
-                        placeholder='State'
-                        onChange={(e) => setState(e.target.value)} />
-                </label>
-                <label>
-                    Country
-                    <input
-                        type='country'
-                        value={country}
-                        placeholder='Country'
-                        onChange={(e) => setCountry(e.target.value)} />
-                </label>
-                <label>
-                    Latitude
-                    <input
-                        type='lat'
-                        value={lat}
-                        placeholder='Latitude'
-                        onChange={(e) => setLat(e.target.value)} />
-                </label>
-                <label>
-                    Longitude
-                    <input
-                        type='lng'
-                        value={lng}
-                        placeholder='Longitude'
-                        onChange={(e) => setLng(e.target.value)} />
-                </label>
-                <label>
-                    Name
-                    <input
-                        type='name'
-                        value={name}
-                        placeholder='Name'
-                        onChange={(e) => setName(e.target.value)} />
-                </label>
-                <label>
-                    Description
-                    <input
-                        type='description'
-                        value={description}
-                        placeholder='Description'
-                        onChange={(e) => setDescription(e.target.value)} />
-                </label>
-                <label>
-                    Price
-                    <input
-                        type='price'
-                        value={price}
-                        placeholder='Price'
-                        onChange={(e) => setPrice(e.target.value)} />
-                </label>
-                <label>
-                    Image Url
-                    <input
-                        type='imageUrl'
-                        value={previewImage}
-                        placeholder='Image Url'
-                        onChange={(e) => setPreviewImage(e.target.value)} />
-                </label>
-            </form>
-            {user.id && (
+                <div>
+                    <label>
+                        Address
+                        <input
+                            type='address'
+                            value={address}
+                            placeholder='Address'
+                            onChange={(e) => setAddress(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        City
+                        <input
+                            type='city'
+                            value={city}
+                            placeholder='City'
+                            onChange={(e) => setCity(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        State
+                        <input
+                            type='state'
+                            value={state}
+                            placeholder='State'
+                            onChange={(e) => setState(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Country
+                        <input
+                            type='country'
+                            value={country}
+                            placeholder='Country'
+                            onChange={(e) => setCountry(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Latitude
+                        <input
+                            type='lat'
+                            value={lat}
+                            placeholder='Latitude'
+                            onChange={(e) => setLat(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Longitude
+                        <input
+                            type='lng'
+                            value={lng}
+                            placeholder='Longitude'
+                            onChange={(e) => setLng(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Name
+                        <input
+                            type='name'
+                            value={name}
+                            placeholder='Name'
+                            onChange={(e) => setName(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Description
+                        <input
+                            type='description'
+                            value={description}
+                            placeholder='Description'
+                            onChange={(e) => setDescription(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Price
+                        <input
+                            type='price'
+                            value={price}
+                            placeholder='Price'
+                            onChange={(e) => setPrice(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Image Url
+                        <input
+                            type='imageUrl'
+                            value={previewImage}
+                            placeholder='Image Url'
+                            onChange={(e) => setPreviewImage(e.target.value)} />
+                    </label>
+                </div>
                 <div onClick={handleSubmit} className='button' value={formType}>{formType}</div>
-            )}
+            </form>
         </section>
     )
 }
