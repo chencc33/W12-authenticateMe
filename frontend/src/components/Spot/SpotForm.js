@@ -18,27 +18,47 @@ const SpotForm = ({ spot, formType }) => {
     const [name, setName] = useState(spot.name)
     const [description, setDescription] = useState(spot.description)
     const [price, setPrice] = useState(spot.price)
+    const [validationErrors, setValidationErrors] = useState([])
+    const [hasSubmitted, setHasSubmitted] = useState(false)
     // const [showForm, setShowForm] = useState(false)
 
+    useEffect(() => {
+        let errors = []
+        if (!address.length) errors.push('Please provide your address')
+        if (!city.length) errors.push('Please provide your city')
+        if (!state.length) errors.push('Please provide your state')
+        if (!country.length) errors.push('Please provide the country')
+        if (!lat.length) errors.push('Please provide the latitude')
+        if (!lng.length) errors.push('Please provide the longitude')
+        if (!name.length) errors.push('Please provide the spot name')
+        if (!description.length) errors.push('Please provide the spot description')
+        if (!Number.isInteger(price)) errors.push('Please provide the price as integer')
+        setValidationErrors(errors)
+    }, [address, city, state, country, lat, lng, name, description, price])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setHasSubmitted(true)
         const data = { ...spot, address, city, state, country, lat, lng, name, description, price }
-        // console.log('***data***', data)
         if (formType === 'Create Spot') {
             const newSpot = await dispatch(createOneSpot(data))
             if (newSpot) {
                 history.push(`/spots/${newSpot.id}`)
             }
-            // await dispatch(createOneSpot(data))
         } else {
             await dispatch(updateOneSpot(data))
         }
-        //// still have errors in with redirect
     }
 
     return (
         <section>
+            {validationErrors.length > 0 && hasSubmitted && (
+                <ul>
+                    {validationErrors.map((error) => (
+                        <li key={error}>{error}</li>
+                    ))}
+                </ul>
+            )}
             <form>
                 <label>
                     Address
