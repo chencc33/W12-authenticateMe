@@ -18,23 +18,23 @@ const SpotList = () => {
     useEffect(() => {
         dispatch(getAllSpots())
     }, [dispatch])
+
     if (!spotsArr.length) return null
 
     return (
         <>
             <div className='grid'>
                 {spotsArr.map(({ id, address, avgRating, city, state, statedescription, name, previewImage, price }) => (
-                    <div className='item card' key={id} onClick={() => { history.push(`/spots/1`) }}>
+                    <div className='item card' key={id} onClick={() => { history.push(`/spots/${id}`) }}>
                         <img src={previewImage} alt="PreviewImage" />
                         <div className='card-container'>
-                            <div>{city}, {state}</div>
-                            <div className='rating-container'>
-                                <i className="fa-solid fa-star"></i>
-                                <div>{avgRating}</div>
+                            <div className='intro-container'>
+                                <div>{city}, {state}</div>
+                                <div className='rating-container'>
+                                    <i className="fa-solid fa-star">{avgRating}</i>
+                                </div>
                             </div>
                             <div>${price} night</div>
-                            {/* <Link to={`/spots/${id}`}>
-                            </Link> */}
                         </div>
                     </div>
                 ))}
