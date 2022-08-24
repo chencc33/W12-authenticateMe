@@ -26,15 +26,15 @@ const SpotForm = ({ spot, formType }) => {
         const data = { ...spot, address, city, state, country, lat, lng, name, description, price }
         // console.log('***data***', data)
         if (formType === 'Create Spot') {
-            await dispatch(createOneSpot(data))
+            const newSpot = await dispatch(createOneSpot(data))
+            if (newSpot) {
+                history.push(`/spots/${newSpot.id}`)
+            }
+            // await dispatch(createOneSpot(data))
         } else {
             await dispatch(updateOneSpot(data))
         }
         //// still have errors in with redirect
-        // const newSpot = await dispatch(createOneSpot(data))
-        // if (newSpot) {
-        //     history.push(`/spots/${newSpot.id}`)
-        // }
     }
 
     return (
