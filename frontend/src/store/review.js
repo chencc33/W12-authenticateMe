@@ -47,16 +47,33 @@ export const getReviewBySpot = (spotId) => async dispatch => {
 
 //Thunk: create a review by SpotId
 export const createReview = (data, spotId) => async dispatch => {
+    console.log('****test****')
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
-    console.log('***response from thunk****', response)
-    if (response.ok) {
-        dispatch(createReviewAction(data))
+    console.log('****test2****')
+    const received = await response.json()
+    console.log('***response from thunk****', received)
+    if (!received.message && response.ok) {
+        console.log('***going to reducer***')
+        dispatch(createReviewAction(received))
     }
 }
+
+//thunk: delete a review
+export const deleteReview = (review) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/:reviewId`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    if (response.ok) {
+        dispatch(deleteReivewAction(review))
+    }
+
+}
+
 
 // Review Reducer
 const reviewReducer = (state = {}, action) => {
@@ -80,8 +97,11 @@ const reviewReducer = (state = {}, action) => {
             return allReviewsBySpotObj
         case CREATE_REVIEW:
             const newState = { ...state }
-            newState[action.reviews.id] = action.reviews
+            newState[action.review.id] = action.review
             return newState
+        case DELETE_REVIEW:
+            const copyState = { ...state }
+        // delete copyState[ac]
         default:
             return state
     }
