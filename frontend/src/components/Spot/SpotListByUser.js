@@ -2,7 +2,7 @@ import { getAllSpotsByUser } from "../../store/spot";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Link } from "react-router-dom";
-import './SpotList.css'
+import './Style/SpotList.css'
 
 const SpotListByUser = () => {
     const dispatch = useDispatch()

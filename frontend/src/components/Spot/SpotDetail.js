@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { deleteOneSpot } from '../../store/spot'
 import { useHistory } from 'react-router-dom'
 import { createOneSpot } from '../../store/spot'
-import './SpotDetail.css'
+import './Style/SpotDetail.css'
 import EditSpotForm from './EditSpotForm'
 import ReviewListBySpot from '../Review/ReviewListBySpot'
 

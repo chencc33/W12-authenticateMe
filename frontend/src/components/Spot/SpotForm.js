@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createOneSpot } from '../../store/spot';
 import { updateOneSpot } from '../../store/spot';
-import './SpotForm.css'
+import './Style/SpotForm.css'
 
 
 const SpotForm = ({ spot, formType }) => {

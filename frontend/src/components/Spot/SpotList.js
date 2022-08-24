@@ -2,7 +2,7 @@ import { getAllSpots } from '../../store/spot'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import CreateSpotForm from './CreateSpotForm'
-import './SpotList.css'
+import './Style/SpotList.css'
 import { useHistory } from 'react-router-dom'
 
 const SpotList = () => {
