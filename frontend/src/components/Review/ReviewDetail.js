@@ -12,8 +12,8 @@ const ReviewDetail = () => {
     const logInUserId = useSelector((state) => state.session.user.id)
     if (!review) return null
     const reviewUserId = review.userId
-    console.log('****Review From Component****', review)
-    console.log('****UserId From Component****', logInUserId)
+    console.log('****Review From Component****', typeof reviewUserId)
+    // console.log('****UserId From Component****', logInUserId)
 
     return (
         <>

@@ -14,11 +14,13 @@ const SpotDetail = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const oneSpot = useSelector((state) => state.spots)
+    console.log('***OneSpot from component ****', oneSpot)
     const targetSpot = oneSpot[spotId]
     console.log('***target Spot from component ****', targetSpot)
     const [showEditForm, setShowEditForm] = useState(false)
-    console.log('*****from component******', targetSpot.previewImage)
+    // console.log('*****from component******', targetSpot.previewImage)
     useEffect(() => {
+        console.log('****useEffect running***')
         dispatch(getOneSpot(spotId))
     }, [dispatch, spotId])
 
@@ -58,6 +60,7 @@ const SpotDetail = () => {
                         <div>
                             {targetSpot.city}, {targetSpot.state}
                         </div>
+                        {console.log('****reach the end of the component****')}
                     </div>
                 </>
             )}
@@ -73,6 +76,7 @@ const SpotDetail = () => {
                     <ReviewListBySpot spotId={spotId} />
                 </div>
             </div>
+
         </>
     )
 }

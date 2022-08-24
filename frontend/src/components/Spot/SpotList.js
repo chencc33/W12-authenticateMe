@@ -23,6 +23,7 @@ const SpotList = () => {
                 {spotsArr.map(({ id, address, avgRating, city, state, statedescription, name, previewImage, price }) => (
                     <div className='item' key={id}>
                         <img src={previewImage} alt="PreviewImage" />
+                        <div>{name}</div>
                         <div>{state}</div>
                         <Link to={`/spots/${id}`}>
                             {city}{address}

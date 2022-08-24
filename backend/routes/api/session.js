@@ -81,7 +81,7 @@ router.get(
             );
         }
         // if there is no session, return JSON with an empty obj
-        else return res.json({});
+        else return res.json(null);
     }
 );
 
