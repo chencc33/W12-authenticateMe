@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CreateSpotForm from './CreateSpotForm'
 import './SpotList.css'
+import { useHistory } from 'react-router-dom'
 
 const SpotList = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const spots = useSelector((state) => state.spots)
     const spotsArr = Object.values(spots)
     const [showForm, setShowForm] = useState(false)
@@ -17,17 +19,23 @@ const SpotList = () => {
         dispatch(getAllSpots())
     }, [dispatch])
     if (!spotsArr.length) return null
+
     return (
         <>
             <div className='grid'>
                 {spotsArr.map(({ id, address, avgRating, city, state, statedescription, name, previewImage, price }) => (
-                    <div className='item' key={id}>
+                    <div className='item card' key={id} onClick={() => { history.push(`/spots/1`) }}>
                         <img src={previewImage} alt="PreviewImage" />
-                        <div>{name}</div>
-                        <div>{state}</div>
-                        <Link to={`/spots/${id}`}>
-                            {city}{address}
-                        </Link>
+                        <div className='card-container'>
+                            <div>{city}, {state}</div>
+                            <div className='rating-container'>
+                                <i className="fa-solid fa-star"></i>
+                                <div>{avgRating}</div>
+                            </div>
+                            <div>${price} night</div>
+                            {/* <Link to={`/spots/${id}`}>
+                            </Link> */}
+                        </div>
                     </div>
                 ))}
             </div>

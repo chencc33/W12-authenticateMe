@@ -4,9 +4,32 @@
     grid-gap: 12px
 }
 
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    object-fit: cover;
+    height: 15vm;
+    cursor: pointer;
+}
+
+.container {
+    padding: 2px 16px;
+}
+
 .item {
     min-height: 200px;
-    background-color: rgba(192, 205, 210, 0.21);
+}
+
+.card img {
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+    height: 200px
+}
+
+div {
+    display: block;
 }
 
 .button {
