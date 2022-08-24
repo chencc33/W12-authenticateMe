@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { getReviewByUser } from '../../store/review';
+import { NavLink } from 'react-router-dom';
 
 const ReviewListByUser = () => {
     const dispatch = useDispatch()
@@ -21,13 +22,16 @@ const ReviewListByUser = () => {
                     <ul>
                         <li key={review.id}>
                             <div>
-                                Spot: {review.spotId}
-                            </div>
-                            <div>
-                                Star: {review.stars}
-                            </div>
-                            <div>
-                                Review: {review.review}
+                                <div>
+                                    Spot: {review.spotId}
+                                </div>
+                                <div>
+                                    Star: {review.stars}
+                                </div>
+                                <div>
+                                    Review: {review.review}
+                                </div>
+                                <NavLink to={`/reviews/${review.id}`}>Go Review {review.id}</NavLink>
                             </div>
                         </li>
                     </ul>

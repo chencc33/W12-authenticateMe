@@ -24,7 +24,7 @@ const SpotForm = ({ spot, formType }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = { ...spot, address, city, state, country, lat, lng, name, description, price }
-        console.log('***data***', data)
+        // console.log('***data***', data)
         if (formType === 'Create Spot') {
             await dispatch(createOneSpot(data))
         } else {

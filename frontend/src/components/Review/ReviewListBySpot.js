@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, NavLink } from 'react-router-dom'
 import { getReviewBySpot } from '../../store/review'
 import './Review.css'
 import { createReview } from '../../store/review'
+import ReviewDetail from './ReviewDetail'
 
 const ReviewListBySpot = () => {
     const { spotId } = useParams()
@@ -24,6 +25,7 @@ const ReviewListBySpot = () => {
         const data = { review, stars }
         await dispatch(createReview(data, spotId))
     }
+    if (!reviewsArr.length) return null
     return (
         <>
             <div>
@@ -36,6 +38,7 @@ const ReviewListBySpot = () => {
                         <div>
                             stars: {review.stars}
                         </div>
+                        <NavLink to={`/reviews/${review.id}`}>Go Review {review.id}</NavLink>
                     </div>
                 ))}
             </div>
