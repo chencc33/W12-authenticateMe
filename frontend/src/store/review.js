@@ -20,9 +20,9 @@ export const createReviewAction = (review) => ({
     review
 })
 
-export const deleteReivewAction = (review) => ({
+export const deleteReivewAction = (reviewId) => ({
     type: DELETE_REVIEW,
-    review
+    reviewId
 })
 
 // Thunk: get all reviews by current user
@@ -47,29 +47,32 @@ export const getReviewBySpot = (spotId) => async dispatch => {
 
 //Thunk: create a review by SpotId
 export const createReview = (data, spotId) => async dispatch => {
-    console.log('****test****')
+    // console.log('****test****')
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
-    console.log('****test2****')
+    // console.log('****test2****')
     const received = await response.json()
-    console.log('***response from thunk****', received)
+    // console.log('***response from thunk****', received)
     if (!received.message && response.ok) {
-        console.log('***going to reducer***')
+        // console.log('***going to reducer***')
         dispatch(createReviewAction(received))
     }
 }
 
 //thunk: delete a review
-export const deleteReview = (review) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/:reviewId`, {
+export const deleteReview = (reviewId) => async dispatch => {
+    console.log('***test1***')
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     })
+    console.log('***test2***')
     if (response.ok) {
-        dispatch(deleteReivewAction(review))
+        const review = await response.json()
+        dispatch(deleteReivewAction(reviewId))
     }
 
 }
@@ -101,7 +104,8 @@ const reviewReducer = (state = {}, action) => {
             return newState
         case DELETE_REVIEW:
             const copyState = { ...state }
-        // delete copyState[ac]
+            delete copyState[action.reviewId]
+            return copyState
         default:
             return state
     }

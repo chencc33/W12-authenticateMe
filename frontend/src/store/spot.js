@@ -5,7 +5,6 @@ const LOAD_SPOT_USER = 'spots/getSpotsByUser'
 const LOAD_ONE_SPOT = 'spot/getOneSpot'
 const ADD_ONE = 'spots/addOneSpot'
 const UPDATE_ONE = 'spot/updateOneSpot'
-const ADD_IMAGE = 'spot/addImageToSpot'
 const DELTE_ONE = 'spot/deleteOneSpot'
 
 const loadSpotsAction = spots => ({
@@ -30,11 +29,6 @@ const addSpotAction = spot => ({
 
 const updateSpotAction = spot => ({
     type: UPDATE_ONE,
-    spot
-})
-
-const addImageAction = spot => ({
-    type: ADD_IMAGE,
     spot
 })
 
@@ -120,18 +114,6 @@ export const deleteOneSpot = (spotId) => async dispatch => {
     }
 }
 
-//Add Image Thunk
-export const addImageToSpot = (spotId) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-    })
-    if (response.ok) {
-        const spot = await response.json()
-        dispatch(addImageAction(spot))
-    }
-}
-
 const initialState = {}
 
 const spotReducer = (state = initialState, action) => {
@@ -173,9 +155,6 @@ const spotReducer = (state = initialState, action) => {
             let copyState = { ...state }
             delete copyState[action.spotId]
             return copyState
-        case ADD_IMAGE:
-            let addImageState = { ...state }
-            console.log('***addImageState from reducer***', addImageState)
         default:
             return state
     }
