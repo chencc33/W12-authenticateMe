@@ -20,7 +20,8 @@ function Navigation({ isLoaded }) {
         sessionLinks = (
             <>
                 <LoginFormModal />
-                <NavLink to="/signup">Sign Up</NavLink>
+                <NavLink to="/signup" className='dropdown-signup'>Sign Up</NavLink>
+                <hr></hr>
             </>
         );
     }
@@ -32,6 +33,9 @@ function Navigation({ isLoaded }) {
                     <i class="fa-brands fa-airbnb"></i>
                     <div className='logo-font'>airbnb</div>
                 </div>
+                <div>
+                    <NavLink exact to="/"><i class="fa-solid fa-house"></i></NavLink>
+                </div>
                 <div className='hostButton' onClick={() => (history.push('/spots/create'))}>Become a Host</div>
                 <div class='dropdown-container'>
                     <div className='dropdown-button'>
@@ -39,10 +43,7 @@ function Navigation({ isLoaded }) {
                         <i class="fa-solid fa-circle-user"></i>
                     </div>
                     <div className='dropdown-content'>
-                        <div>
-                            <NavLink exact to="/">Home</NavLink>
-                        </div>
-                        <div>
+                        <div >
                             {isLoaded && sessionLinks}
                         </div>
                         <div>

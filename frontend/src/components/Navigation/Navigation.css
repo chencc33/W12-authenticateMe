@@ -7,7 +7,7 @@
 .hostButton {
     cursor: pointer;
     font-size: 17px;
-    color: rgb(98, 98, 98);
+    color: rgb(34, 34, 34);
 }
 
 .dropdown-button {
@@ -22,45 +22,57 @@
     transition: box-shadow 0.3s ease-in-out;
 }
 
+.fa-house {
+    color: black
+}
+
 .dropdown-button:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.575);
 }
 
 .fa-bars {
     font-size: 30px;
-    color: grey;
+    color: black;
 }
 
 .fa-circle-user {
     font-size: 30px;
-    color: grey;
+    color: black;
 }
 
 
-/* .dropdown-container {
-    border: 1px grey solid;
+.dropdown-container {
+    border: 1px black solid;
     border-radius: 10px;
     font-size: 30px;
+    position: relative;
+    margin-right: 30px;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    z-index: 1;
+    background-color: white;
+    font-size: 25px;
 }
 
-.dropdown-content>ul {
+.dropdown-container:hover .dropdown-content {
     display: block;
+    margin: auto;
+    text-align: center;
 }
 
-.dropdown-container:focus .dropdown-content {
-    display: block;
-} */
+.dropdown-signup {
+    font-size: 18px;
+    color: black;
+    text-decoration: none;
+}
 
 .logo-container {
     display: flex;
     font-size: 30px;
-    color: red
+    color: red;
+    margin-left: 10px;
 }
 
 .logo-container>* {
