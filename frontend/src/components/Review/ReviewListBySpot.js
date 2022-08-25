@@ -15,7 +15,7 @@ const ReviewListBySpot = () => {
     console.log('***currentUserId***', logInUserId)
 
     const [review, setReview] = useState("")
-    const [stars, setStars] = useState(5)
+    const [stars, setStars] = useState(0)
     const [showForm, setShowForm] = useState(false)
 
     // console.log('****from component****', reviewsArr)
@@ -66,7 +66,7 @@ const ReviewListBySpot = () => {
                             <label>
                                 stars
                                 <input
-                                    type='stars'
+                                    type='number'
                                     value={stars}
                                     onChange={(e) => setStars(e.target.value)}
                                 />
