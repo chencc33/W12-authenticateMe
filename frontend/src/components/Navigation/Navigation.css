@@ -1,16 +1,39 @@
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 .hostButton {
     cursor: pointer
 }
 
-.logo-container {
-    display: flex;
+/* .dropdown-container {
+    border: 1px grey solid;
+    border-radius: 10px;
+    font-size: 30px;
 }
 
-.logo-container>div {
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.dropdown-content>ul {
+    display: block;
+}
+
+.dropdown-container:focus .dropdown-content {
+    display: block;
+} */
+
+.logo-container {
+    display: flex;
     font-size: 30px;
     color: red
 }
 
-/* .logo-font {
-    color: red;
-} */
+.logo-container>* {
+    padding: 3px;
+}
