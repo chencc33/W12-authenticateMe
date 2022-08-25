@@ -29,46 +29,48 @@ const SpotDetail = () => {
         <>
             {!showEditForm && (
                 <>
+                    <hr></hr>
                     <div>
-                        <div>
-                            <img src={targetSpot.previewImage} alt='Preview Image' />
-                        </div>
-                        <div>
+                        <h1 className='spot-title'>
                             {targetSpot.name}
+                        </h1>
+                        <div className='intro-container'>
+                            <div>
+                                <i class="fa-solid fa-star"></i>
+                                {targetSpot.avgStarRating}
+                            </div>
+                            <div>
+                                {targetSpot.city}, {targetSpot.state}, {targetSpot.country}
+                            </div>
                         </div>
-                        <div>
-                            Address: {targetSpot.address}
-                        </div>
-                        <div>
-                            City: {targetSpot.city}
-                        </div>
-                        <div>
-                            State: {targetSpot.state}
-                        </div>
-                        <div>
-                            Country: {targetSpot.country}
-                        </div>
-                        <div>
-                            Description: {targetSpot.description}
-                        </div>
-                        <div>
-                            Price: {targetSpot.price}
-                        </div>
-                        <div>
-                            {targetSpot.avgRating}
-                        </div>
-                        <div>
-                            {targetSpot.city}, {targetSpot.state}
+                        <div className='detail-card'>
+                            <div>
+                                <img src={targetSpot.previewImage} alt='Preview Image' />
+                            </div>
+                            <div className='card-container'>
+                                <div>
+                                    ${targetSpot.price} night
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-star"></i>
+                                    {targetSpot.avgStarRating}
+                                </div>
+                            </div>
+                            <div>
+                                {targetSpot.description}
+                            </div>
                         </div>
                     </div>
                 </>
-            )}
+            )
+            }
             <div onClick={() => setShowEditForm(true)} className='button'>Edit</div>
             {showEditForm ? <EditSpotForm /> : null}
             <button onClick={async () => {
                 await dispatch(deleteOneSpot(spotId))
                 history.push('/spots')
             }}>Delete</button>
+            <hr></hr>
             <div>
                 <h2>Reviews</h2>
                 <div>
