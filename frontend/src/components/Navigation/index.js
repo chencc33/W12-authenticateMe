@@ -30,6 +30,7 @@ function Navigation({ isLoaded }) {
             <div className='logo-container'>
                 <div className='logo-font'>airbnb</div>
             </div>
+            <div class='dropdown'></div>
             <ul>
                 <li>
                     <NavLink exact to="/">Home</NavLink>
