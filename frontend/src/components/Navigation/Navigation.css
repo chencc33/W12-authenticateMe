@@ -1,3 +1,16 @@
 .hostButton {
     cursor: pointer
 }
+
+.logo-container {
+    display: flex;
+}
+
+.logo-container>div {
+    font-size: 30px;
+    color: red
+}
+
+/* .logo-font {
+    color: red;
+} */
