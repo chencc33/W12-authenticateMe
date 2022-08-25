@@ -5,6 +5,7 @@ import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
 import CreateSpotForm from '../Spot/CreateSpotForm';
+import DemoUserLogin from '../DemoUserForm/DemoUserForm';
 
 function Navigation({ isLoaded }) {
     const history = useHistory()
@@ -25,13 +26,19 @@ function Navigation({ isLoaded }) {
     }
 
     return (
-        <ul>
-            <li>
-                <NavLink exact to="/">Home</NavLink>
-                {isLoaded && sessionLinks}
-                <div className='hostButton' onClick={() => (history.push('/spots/create'))}>Become a Host</div>
-            </li>
-        </ul>
+        <>
+            <div className='logo-container'>
+                <div className='logo-font'>airbnb</div>
+            </div>
+            <ul>
+                <li>
+                    <NavLink exact to="/">Home</NavLink>
+                    {isLoaded && sessionLinks}
+                    <div className='hostButton' onClick={() => (history.push('/spots/create'))}>Become a Host</div>
+                    <DemoUserLogin />
+                </li>
+            </ul>
+        </>
     );
 }
 
