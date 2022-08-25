@@ -42,6 +42,7 @@ function ProfileButton({ user }) {
                     </li>
                 </ul>
             )}
+            <hr></hr>
         </>
     );
 }

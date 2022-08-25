@@ -6,7 +6,7 @@ function DemoUserLogin() {
     const dispatch = useDispatch()
 
     return (
-        <div className='button' onClick={() => { dispatch(sessionActions.login({ credential: 'user1@user.io', password: 'password2' })) }}>Demo User Login</div>
+        <div className='demouser-button' onClick={() => { dispatch(sessionActions.login({ credential: 'user1@user.io', password: 'password2' })) }}>Demo User Login</div>
     )
 }
 

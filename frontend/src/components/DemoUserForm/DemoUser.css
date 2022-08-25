@@ -1,5 +1,11 @@
-.button {
-    font-size: 90px;
-    text-align: center;
+.demouser-button {
+    font-size: 18px;
     color: black;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.demouser-button:hover {
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.8);
 }
