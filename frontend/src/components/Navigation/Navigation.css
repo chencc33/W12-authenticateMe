@@ -3,11 +3,24 @@
     justify-content: space-between;
 }
 
+.nav-bar-right {
+    display: flex;
+}
 
 .hostButton {
     cursor: pointer;
-    font-size: 17px;
-    color: rgb(34, 34, 34);
+    font-size: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
+    transition: box-shadow 0.3s ease-in-out;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.hostButton:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
 }
 
 .dropdown-button {
@@ -22,11 +35,21 @@
     transition: box-shadow 0.3s ease-in-out;
 }
 
-.fa-house {
-    color: black
-}
 
 .dropdown-button:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.575);
+}
+
+
+
+.fa-house {
+    color: black;
+    margin-right: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.fa-house:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.575);
 }
 
@@ -67,6 +90,7 @@
     font-size: 18px;
     color: black;
     text-decoration: none;
+    width: max-content;
 }
 
 .dropdown-signup:hover {

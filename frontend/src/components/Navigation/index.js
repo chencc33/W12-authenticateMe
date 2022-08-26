@@ -33,21 +33,23 @@ function Navigation({ isLoaded }) {
                     <i class="fa-brands fa-airbnb"></i>
                     <div className='logo-font'>airbnb</div>
                 </div>
-                <div>
-                    <NavLink exact to="/"><i class="fa-solid fa-house"></i></NavLink>
-                </div>
-                <div className='hostButton' onClick={() => (history.push('/spots/create'))}>Become a Host</div>
-                <div class='dropdown-container'>
-                    <div className='dropdown-button'>
-                        <i class="fa-solid fa-bars"></i>
-                        <i class="fa-solid fa-circle-user"></i>
+                <div className='nav-bar-right'>
+                    <div >
+                        <NavLink exact to="/"><i class="fa-solid fa-house"></i></NavLink>
                     </div>
-                    <div className='dropdown-content'>
-                        <div >
-                            {isLoaded && sessionLinks}
+                    <div className='hostButton' onClick={() => (history.push('/spots/create'))}>Become a Host</div>
+                    <div class='dropdown-container'>
+                        <div className='dropdown-button'>
+                            <i class="fa-solid fa-bars"></i>
+                            <i class="fa-solid fa-circle-user"></i>
                         </div>
-                        <div>
-                            <DemoUserLogin />
+                        <div className='dropdown-content'>
+                            <div >
+                                {isLoaded && sessionLinks}
+                            </div>
+                            <div>
+                                <DemoUserLogin />
+                            </div>
                         </div>
                     </div>
                 </div>
