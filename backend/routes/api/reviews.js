@@ -11,6 +11,7 @@ router.get('/current', restoreUser, async (req, res, next) => {
     const { user } = req
     const userId = user.toSafeObject().id
     const reviews = await Review.findAll({
+        where: { userId: userId },
         include: [
             { model: User, attributes: ['id', 'firstName', 'lastName'] },
             { model: Spot, attributes: { exclude: ['createdAt', 'updatedAt'] } },

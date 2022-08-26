@@ -51,13 +51,21 @@ function Navigation({ isLoaded }) {
                                 {isLoaded && sessionLinks}
                             </div>
                             <div class='dropdown-myspot'>
-                                {sessionUser && (<NavLink to='/current/spots'>My Spot</NavLink>)}
+                                {sessionUser && (
+                                    <>
+                                        <NavLink to='/current/spots'>My Spot</NavLink>
+                                        <hr></hr>
+                                    </>
+                                )}
                             </div>
-                            <hr></hr>
                             <div class='dropdown-myreviews'>
-                                {sessionUser && (<NavLink to='/reviews/current'>My Reviews</NavLink>)}
+                                {sessionUser && (
+                                    <>
+                                        <NavLink to='/reviews/current'>My Reviews</NavLink>
+                                        <hr></hr>
+                                    </>
+                                )}
                             </div>
-                            <hr></hr>
                             <div>
                                 <DemoUserLogin />
                             </div>

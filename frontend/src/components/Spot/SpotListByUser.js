@@ -8,9 +8,7 @@ const SpotListByUser = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const spotsByUser = useSelector((state) => state.spots)
-    // console.log('****spotsByuser from component***', spotsByUser)
     const spotsByUserArr = Object.values(spotsByUser)
-    // console.log('****spotsArrByuser from component***', spotsByUserArr)
 
     useEffect(() => {
         dispatch(getAllSpotsByUser())
