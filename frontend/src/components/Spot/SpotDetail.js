@@ -16,6 +16,8 @@ const SpotDetail = () => {
     const history = useHistory()
     const oneSpot = useSelector((state) => state.spots)
     const reviews = useSelector((state) => state.reviews)
+    const currentUser = useSelector((state) => state.session.user)
+
     const numReviews = Object.keys(reviews).length
 
     const targetSpot = oneSpot[spotId]
@@ -26,7 +28,11 @@ const SpotDetail = () => {
         dispatch(getOneSpot(spotId))
     }, [dispatch])
 
+    let currentUserId
     if (!targetSpot) return null
+    if (currentUser) currentUserId = currentUser.id
+    const spotOwner = targetSpot.ownerId
+
     return (
         <>
             {!showEditForm && (
@@ -67,12 +73,16 @@ const SpotDetail = () => {
                 </>
             )
             }
-            <div onClick={() => setShowEditForm(true)} className='button'>Edit</div>
+            {currentUserId == spotOwner && (
+                <div onClick={() => setShowEditForm(true)} className='button'>Edit</div>
+            )}
             {showEditForm ? <EditSpotForm /> : null}
-            <button onClick={async () => {
-                await dispatch(deleteOneSpot(spotId))
-                history.push('/spots')
-            }}>Delete</button>
+            {currentUserId == spotOwner && (
+                <button onClick={async () => {
+                    await dispatch(deleteOneSpot(spotId))
+                    history.push('/spots')
+                }}>Delete</button>
+            )}
             <hr></hr>
             <div>
                 <h2>Reviews</h2>
