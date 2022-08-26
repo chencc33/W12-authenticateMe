@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { useParams, NavLink } from 'react-router-dom'
+import { useParams, NavLink, useHistory } from 'react-router-dom'
 import { getReviewBySpot } from '../../store/review'
 import './Review.css'
 import { createReview } from '../../store/review'
@@ -9,8 +9,8 @@ import ReviewDetail from './ReviewDetail'
 const ReviewListBySpot = () => {
     const { spotId } = useParams()
     const dispatch = useDispatch()
+    const history = useHistory()
     const reviewsObj = useSelector((state) => state.reviews)
-    console.log('***from component***', reviewsObj)
     const reviewsArr = Object.values(reviewsObj)
     const logInUser = useSelector((state) => state.session.user)
     let logInUserId
@@ -29,6 +29,7 @@ const ReviewListBySpot = () => {
     if (!reviewsArr.length) return null
 
     let showButton = true
+    if (!logInUserId) showButton = false
     for (let review of reviewsArr) {
         if (review.userId == logInUserId) { showButton = false }
     }
@@ -42,14 +43,14 @@ const ReviewListBySpot = () => {
         <>
             <div>
                 {reviewsArr.map((review) => (
-                    <div key={review.id}>
+                    <div key={review.id} className='singe-review-box' onClick={() => { history.push(`/reviews/${review.id}`) }}>
                         <div>
-                            Review: {review.review}
+                            <i className="fa-solid fa-circle-user"></i>
                         </div>
                         <div>
-                            stars: {review.stars}
+                            {review.review}
                         </div>
-                        <NavLink to={`/reviews/${review.id}`}>Go Review {review.id}</NavLink>
+                        {/* <NavLink to={`/reviews/${review.id}`}>Go Review {review.id}</NavLink> */}
                     </div>
                 ))}
             </div>

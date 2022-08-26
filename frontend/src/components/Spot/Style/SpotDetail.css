@@ -51,6 +51,10 @@ hr {
     transform: translateY(-70%);
 }
 
+.reviews-container {
+    padding: 5% 20%;
+}
+
 .button {
     display: inline-block;
     padding: 6px 12px;

@@ -1,3 +1,16 @@
+.singe-review-box {
+    margin-bottom: 9%;
+}
+
+.singe-review-box:hover {
+    cursor: pointer;
+    background: rgba(128, 128, 128, 0.101);
+}
+
+.fa-circle-user {
+    margin-bottom: 2%;
+}
+
 .button {
     display: inline-block;
     padding: 6px 12px;
