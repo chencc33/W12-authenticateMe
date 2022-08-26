@@ -1,18 +1,25 @@
-.intro-container {
-    display: flex;
-    justify-content: space-start;
-    font-size: 18px;
-    margin-right: 10px;
+.spot-container {
+    padding: 10% 20%;
+    min-width: 500px;
 }
+
+.intro-container {
+    font-size: 15px;
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+
 
 .spot-title {
     font-size: 25px;
+    margin-left: 10px;
 }
 
-img {
-    width: 100%;
-    padding: 15px;
-    border-radius: 5px;
+
+.spot-image {
+    width: 90%;
+    max-width: 800px;
+    padding: 5%;
 }
 
 hr {
@@ -22,15 +29,26 @@ hr {
 .detail-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
+    border-radius: 15px;
 }
 
 .card-container {
     display: flex;
     font-size: 20px;
+    margin-left: 5%;
 }
 
 .card-container>div {
     padding: 4px;
+}
+
+.spot-description {
+    margin-left: 5%;
+}
+
+.fa-circle {
+    font-size: 4px;
+    transform: translateY(-70%);
 }
 
 .button {

@@ -15,9 +15,10 @@ const SpotDetail = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const oneSpot = useSelector((state) => state.spots)
-    // console.log('****One spot****', oneSpot)
+    const reviews = useSelector((state) => state.reviews)
+    const numReviews = Object.keys(reviews).length
+
     const targetSpot = oneSpot[spotId]
-    // console.log('****target spot****', targetSpot)
 
     const [showEditForm, setShowEditForm] = useState(false)
 
@@ -31,7 +32,7 @@ const SpotDetail = () => {
             {!showEditForm && (
                 <>
                     <hr></hr>
-                    <div>
+                    <div className='spot-container'>
                         <h1 className='spot-title'>
                             {targetSpot.name}
                         </h1>
@@ -39,25 +40,26 @@ const SpotDetail = () => {
                             <div>
                                 <i className="fa-solid fa-star"></i>
                                 {targetSpot.avgStarRating}
-                            </div>
-                            <div>
+                                &ensp;<i className="fa-solid fa-circle"></i>&ensp;
+                                {numReviews} reviews
+                                &ensp;<i className="fa-solid fa-circle"></i>&ensp;
                                 {targetSpot.city}, {targetSpot.state}, {targetSpot.country}
                             </div>
                         </div>
                         <div className='detail-card'>
                             <div>
-                                <img src={targetSpot.previewImage} alt='Preview Image' />
+                                <img className="spot-image" src={targetSpot.previewImage} alt='Preview Image' />
                             </div>
                             <div className='card-container'>
                                 <div>
-                                    ${targetSpot.price} night
+                                    ${targetSpot.price} /night
                                 </div>
                                 <div>
                                     <i className="fa-solid fa-star"></i>
                                     {targetSpot.avgStarRating}
                                 </div>
                             </div>
-                            <div>
+                            <div className='spot-description'>
                                 {targetSpot.description}
                             </div>
                         </div>
