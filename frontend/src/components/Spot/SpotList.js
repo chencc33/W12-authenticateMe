@@ -22,19 +22,17 @@ const SpotList = () => {
 
     return (
         <>
-            <div className='grid'>
+            <div className='main-body-div'>
                 {spotsArr.map(({ id, address, avgRating, city, state, statedescription, name, previewImage, price }) => (
-                    <div className='item card' key={id} onClick={() => { history.push(`/spots/${id}`) }}>
-                        <img src={previewImage} alt="PreviewImage" />
-                        <div className='card-container'>
-                            <div className='intro-container'>
-                                <div>{city}, {state}</div>
-                                <div className='rating-container'>
-                                    <i className="fa-solid fa-star">{avgRating}</i>
-                                </div>
+                    <div className='card' key={id} onClick={() => { history.push(`/spots/${id}`) }}>
+                        <img class='card-image' src={previewImage} alt="PreviewImage" />
+                        <div className='intro-container'>
+                            <div className='city-state'>{city}, {state}</div>
+                            <div className='rating-container'>
+                                <i className="fa-solid fa-star">{avgRating}</i>
                             </div>
-                            <div>${price} night</div>
                         </div>
+                        <div className='card-price'>${price} night</div>
                     </div>
                 ))}
             </div>
