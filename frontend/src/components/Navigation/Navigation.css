@@ -119,8 +119,10 @@
     font-size: 30px;
     color: red;
     margin-left: 10px;
+    margin-left: 10%;
 }
 
-.logo-container>* {
-    padding: 3px;
+.fa-airbnb {
+    margin-right: 10px;
+    align-items: center;
 }

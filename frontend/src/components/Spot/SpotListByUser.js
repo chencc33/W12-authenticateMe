@@ -17,7 +17,7 @@ const SpotListByUser = () => {
     }, [dispatch])
 
     return (
-        <div className="grid">
+        <div className="main-body-div">
             {spotsByUserArr.map(({ id, address, avgRating, city, name, price, previewImage, state }) => (
                 <div className="card" onClick={() => { history.push(`/spots/${id}`) }}>
                     <div key={id}>

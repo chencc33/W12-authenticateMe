@@ -31,7 +31,7 @@ function Navigation({ isLoaded }) {
             <div className='nav-bar'>
                 <div className='logo-container'>
                     <i className="fa-brands fa-airbnb"></i>
-                    <div className='logo-font'>airbnb</div>
+                    <div className='logo-font'>Sweet Home</div>
                 </div>
                 <div className='nav-bar-right'>
                     <div >

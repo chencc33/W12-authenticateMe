@@ -116,9 +116,9 @@ const SpotForm = ({ spot, formType }) => {
                     <label>
                         Latitude
                         <input
-                            type='lat'
+                            type='number'
                             value={lat}
-                            placeholder='Latitude'
+                            placeholder='Latitude (-90 to 90)'
                             onChange={(e) => setLat(e.target.value)} />
                     </label>
                 </div>
@@ -126,9 +126,9 @@ const SpotForm = ({ spot, formType }) => {
                     <label>
                         Longitude
                         <input
-                            type='lng'
+                            type='number'
                             value={lng}
-                            placeholder='Longitude'
+                            placeholder='Longitude (-180 to 180)'
                             onChange={(e) => setLng(e.target.value)} />
                     </label>
                 </div>
@@ -158,7 +158,7 @@ const SpotForm = ({ spot, formType }) => {
                         <input
                             type='price'
                             value={price}
-                            placeholder='Price'
+                            placeholder='Enter a postive integer'
                             onChange={(e) => setPrice(e.target.value)} />
                     </label>
                 </div>

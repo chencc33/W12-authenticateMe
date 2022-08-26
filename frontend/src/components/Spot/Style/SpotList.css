@@ -1,33 +1,38 @@
 .main-body-div {
     display: flex;
+    flex-wrap: wrap;
+    margin-left: 10%;
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
     border-radius: 5px;
     object-fit: cover;
     height: 100%;
     cursor: pointer;
-    padding: 15px;
-    width: 1000px;
-    height: 1000px;
-    min-width: 400px;
-    min-height: 400px;
+    padding: 5px;
+    width: 600px;
+    height: 600px;
+    min-width: 300px;
+    min-height: 300px;
 }
 
 
 .card-image {
     width: 85%;
-    height: 30%;
+    height: 60%;
     border-radius: 30px;
 }
 
 .intro-container {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 .rating-container {
-    margin-right: 45px;
+    margin-right: 100px;
 }
 
 .intro-container,
