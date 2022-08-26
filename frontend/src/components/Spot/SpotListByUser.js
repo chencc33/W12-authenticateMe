@@ -1,11 +1,12 @@
 import { getAllSpotsByUser } from "../../store/spot";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import './Style/SpotList.css'
 
 const SpotListByUser = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const spotsByUser = useSelector((state) => state.spots)
     // console.log('****spotsByuser from component***', spotsByUser)
     const spotsByUserArr = Object.values(spotsByUser)
@@ -18,17 +19,19 @@ const SpotListByUser = () => {
     return (
         <div className="grid">
             {spotsByUserArr.map(({ id, address, avgRating, city, name, price, previewImage, state }) => (
-                <ul>
-                    <li className="item">
-                        <div key={id}>
-                            <img src={previewImage} alt="PreviewImage" />
-                            <div>{state}</div>
-                            <Link to={`/spots/${id}`}>
-                                {city}{address}
-                            </Link>
+                <div className="card" onClick={() => { history.push(`/spots/${id}`) }}>
+                    <div key={id}>
+                        <img className='card-image' src={previewImage} alt="PreviewImage" />
+                        <div className='rating-container'>
+                            <i className="fa-solid fa-star">{avgRating}</i>
                         </div>
-                    </li>
-                </ul>))}
+                        <div>{name}</div>
+                        <div>{address}</div>
+                        <div>{city},{state}</div>
+                        <div className='card-price'>${price} night</div>
+                    </div>
+                </div>
+            ))}
         </div>
     )
 }
