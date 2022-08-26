@@ -86,6 +86,26 @@
     width: fit-content;
 }
 
+.dropdown-myspot {
+    font-size: 18px;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-myspot:hover {
+    background-color: rgba(128, 128, 128, 0.076);
+}
+
+.dropdown-myreviews {
+    font-size: 18px;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-myreviews:hover {
+    background-color: rgba(128, 128, 128, 0.076);
+}
+
 .dropdown-signup {
     font-size: 18px;
     color: black;
