@@ -50,7 +50,7 @@ function Navigation({ isLoaded }) {
                             <div >
                                 {isLoaded && sessionLinks}
                             </div>
-                            <div classNam='dropdown-myspot'>
+                            <div className='dropdown-myspot'>
                                 {sessionUser && (
                                     <>
                                         <NavLink to='/current/spots'>My Spot</NavLink>

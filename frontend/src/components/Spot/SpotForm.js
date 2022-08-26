@@ -42,7 +42,7 @@ const SpotForm = ({ spot, formType }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setHasSubmitted(true)
+        setHasSubmitted(!hasSubmitted)
         // console.log('*****spot from spot form *****', spot)
         // console.log('*****from spot form *****', previewImage)
         const data = {
@@ -76,7 +76,7 @@ const SpotForm = ({ spot, formType }) => {
                     <label>
                         Address
                         <input
-                            type='address'
+                            type='text'
                             value={address}
                             placeholder='Address'
                             onChange={(e) => setAddress(e.target.value)} />
@@ -86,7 +86,7 @@ const SpotForm = ({ spot, formType }) => {
                     <label>
                         City
                         <input
-                            type='city'
+                            type='text'
                             value={city}
                             placeholder='City'
                             onChange={(e) => setCity(e.target.value)} />
@@ -96,7 +96,7 @@ const SpotForm = ({ spot, formType }) => {
                     <label>
                         State
                         <input
-                            type='state'
+                            type='text'
                             value={state}
                             placeholder='State'
                             onChange={(e) => setState(e.target.value)} />
@@ -106,7 +106,7 @@ const SpotForm = ({ spot, formType }) => {
                     <label>
                         Country
                         <input
-                            type='country'
+                            type='text'
                             value={country}
                             placeholder='Country'
                             onChange={(e) => setCountry(e.target.value)} />
@@ -136,7 +136,7 @@ const SpotForm = ({ spot, formType }) => {
                     <label>
                         Name
                         <input
-                            type='name'
+                            type='text'
                             value={name}
                             placeholder='Name'
                             onChange={(e) => setName(e.target.value)} />
@@ -146,7 +146,7 @@ const SpotForm = ({ spot, formType }) => {
                     <label>
                         Description
                         <input
-                            type='description'
+                            type='text'
                             value={description}
                             placeholder='Description'
                             onChange={(e) => setDescription(e.target.value)} />
@@ -156,7 +156,7 @@ const SpotForm = ({ spot, formType }) => {
                     <label>
                         Price
                         <input
-                            type='price'
+                            type='number'
                             value={price}
                             placeholder='Enter a postive integer'
                             onChange={(e) => setPrice(e.target.value)} />
@@ -166,13 +166,14 @@ const SpotForm = ({ spot, formType }) => {
                     <label>
                         Image Url
                         <input
-                            type='imageUrl'
+                            type='url'
                             value={previewImage}
                             placeholder='Image Url'
                             onChange={(e) => setPreviewImage(e.target.value)} />
                     </label>
                 </div>
                 <div onClick={handleSubmit} className='button' value={formType}>{formType}</div>
+
             </form>
         </section>
     )
