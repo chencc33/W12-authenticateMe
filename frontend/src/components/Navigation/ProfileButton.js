@@ -33,12 +33,12 @@ function ProfileButton({ user }) {
         <>
             <div className="profile-dropdown">
                 <div className='user-dropdown'>
-                    <i class="fa-solid fa-user"></i>
+                    <i className="fa-solid fa-user"></i>
                     {user.username}
                 </div >
                 <hr></hr>
                 <div className='user-dropdown'>
-                    <i class="fa-solid fa-envelope"></i>
+                    <i className="fa-solid fa-envelope"></i>
                     {user.email}
                 </div>
                 <hr></hr>

@@ -10,9 +10,11 @@ const ReviewListBySpot = () => {
     const { spotId } = useParams()
     const dispatch = useDispatch()
     const reviewsObj = useSelector((state) => state.reviews)
+    console.log('***from component***', reviewsObj)
     const reviewsArr = Object.values(reviewsObj)
-    const logInUserId = useSelector((state) => state.session.user.id)
-    console.log('***currentUserId***', logInUserId)
+    const logInUser = useSelector((state) => state.session.user)
+    let logInUserId
+    if (logInUser) { logInUserId = logInUser.id }
 
     const [review, setReview] = useState("")
     const [stars, setStars] = useState(0)
@@ -20,10 +22,11 @@ const ReviewListBySpot = () => {
 
     // console.log('****from component****', reviewsArr)
 
-
     useEffect(() => {
         dispatch(getReviewBySpot(spotId))
     }, [dispatch, spotId])
+
+    if (!reviewsArr.length) return null
 
     let showButton = true
     for (let review of reviewsArr) {
@@ -34,7 +37,7 @@ const ReviewListBySpot = () => {
         const data = { review, stars }
         await dispatch(createReview(data, spotId))
     }
-
+    if (!reviewsArr.length) return null
     return (
         <>
             <div>

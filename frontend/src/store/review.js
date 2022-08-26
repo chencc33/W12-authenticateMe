@@ -93,7 +93,7 @@ const reviewReducer = (state = {}, action) => {
         case GET_REVIEW_BY_SPOT:
             const allReviewsBySpotObj = {}
             const allReviewsBySpotArr = action.reviews
-            // console.log('***review from reducer***', action.reviews)
+            console.log('***review from reducer***', action.reviews)
             allReviewsBySpotArr.forEach((review) => {
                 allReviewsBySpotObj[review.id] = review
             })

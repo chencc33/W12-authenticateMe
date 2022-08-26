@@ -137,10 +137,10 @@ const spotReducer = (state = initialState, action) => {
             return { ...allSpotByUserObj }
         case LOAD_ONE_SPOT:
             const spotObj = {}
+            // console.log('****oneSpot in Reducer*****', action)
             const spotArr = action.spot
             spotObj[spotArr.id] = spotArr
-            return { ...spotObj }
-        // console.log('****oneSpot in Reducer*****', spotObj)
+            return spotObj
         case ADD_ONE:
             let newState = { ...state }
             newState[action.spot.id] = action.spot

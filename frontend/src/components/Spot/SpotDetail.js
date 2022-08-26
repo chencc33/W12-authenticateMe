@@ -11,18 +11,19 @@ import ReviewListBySpot from '../Review/ReviewListBySpot'
 
 const SpotDetail = () => {
     const { spotId } = useParams()
+    // console.log('*****spotId*****', spotId)
     const dispatch = useDispatch()
     const history = useHistory()
     const oneSpot = useSelector((state) => state.spots)
-
+    // console.log('****One spot****', oneSpot)
     const targetSpot = oneSpot[spotId]
+    // console.log('****target spot****', targetSpot)
 
     const [showEditForm, setShowEditForm] = useState(false)
 
     useEffect(() => {
-
         dispatch(getOneSpot(spotId))
-    }, [dispatch, spotId])
+    }, [dispatch])
 
     if (!targetSpot) return null
     return (
@@ -36,7 +37,7 @@ const SpotDetail = () => {
                         </h1>
                         <div className='intro-container'>
                             <div>
-                                <i class="fa-solid fa-star"></i>
+                                <i className="fa-solid fa-star"></i>
                                 {targetSpot.avgStarRating}
                             </div>
                             <div>
@@ -52,7 +53,7 @@ const SpotDetail = () => {
                                     ${targetSpot.price} night
                                 </div>
                                 <div>
-                                    <i class="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
                                     {targetSpot.avgStarRating}
                                 </div>
                             </div>

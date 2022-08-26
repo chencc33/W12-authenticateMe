@@ -23,9 +23,9 @@ const SpotList = () => {
     return (
         <>
             <div className='main-body-div'>
-                {spotsArr.map(({ id, address, avgRating, city, state, statedescription, name, previewImage, price }) => (
+                {spotsArr.map(({ id, avgRating, city, state, previewImage, price }) => (
                     <div className='card' key={id} onClick={() => { history.push(`/spots/${id}`) }}>
-                        <img class='card-image' src={previewImage} alt="PreviewImage" />
+                        <img className='card-image' src={previewImage} alt="PreviewImage" />
                         <div className='intro-container'>
                             <div className='city-state'>{city}, {state}</div>
                             <div className='rating-container'>

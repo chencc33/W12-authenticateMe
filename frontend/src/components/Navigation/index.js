@@ -30,18 +30,18 @@ function Navigation({ isLoaded }) {
         <>
             <div className='nav-bar'>
                 <div className='logo-container'>
-                    <i class="fa-brands fa-airbnb"></i>
+                    <i className="fa-brands fa-airbnb"></i>
                     <div className='logo-font'>airbnb</div>
                 </div>
                 <div className='nav-bar-right'>
                     <div >
-                        <NavLink exact to="/"><i class="fa-solid fa-house"></i></NavLink>
+                        <NavLink exact to="/"><i className="fa-solid fa-house"></i></NavLink>
                     </div>
                     <div className='hostButton' onClick={() => (history.push('/spots/create'))}>Become a Host</div>
-                    <div class='dropdown-container'>
+                    <div className='dropdown-container'>
                         <div className='dropdown-button'>
-                            <i class="fa-solid fa-bars"></i>
-                            <i class="fa-solid fa-circle-user"></i>
+                            <i className="fa-solid fa-bars"></i>
+                            <i className="fa-solid fa-circle-user"></i>
                         </div>
                         <div className='dropdown-content'>
                             <div >
