@@ -9,23 +9,26 @@ const ReviewDetail = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const review = useSelector((state) => state.reviews[reviewId])
-    const logInUserId = useSelector((state) => state.session.user.id)
+    const logInUser = useSelector((state) => state.session.user)
     if (!review) return null
     const reviewUserId = review.userId
-    console.log('****Review From Component****', typeof reviewUserId)
+    let logInUserId
+    if (logInUser) logInUserId = logInUser.id
+    // console.log('****Review From Component****', typeof reviewUserId)
     // console.log('****UserId From Component****', logInUserId)
 
     return (
         <>
-            <div>
-                <div>Review: {review.review}</div>
+            <div className='singe-review-box'>
+                <div className='review-content'>
+                    Review:&ensp;{review.review}</div>
             </div>
-            <div>
-                <div>Stars: {review.stars}</div>
+            <div className='review-stars'>
+                <div>Stars: &ensp;{review.stars}</div>
             </div>
 
             {logInUserId === reviewUserId ? (
-                <button onClick={async () => {
+                <button className='button' onClick={async () => {
                     await dispatch(deleteReview(reviewId))
                     history.push('/reviews/current')
                 }}>Delete</button>

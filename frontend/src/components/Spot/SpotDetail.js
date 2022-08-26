@@ -85,7 +85,7 @@ const SpotDetail = () => {
             )}
             <hr></hr>
             <div>
-                <div class='reviews-container'>
+                <div className='reviews-container'>
                     <ReviewListBySpot spotId={spotId} />
                 </div>
             </div>
