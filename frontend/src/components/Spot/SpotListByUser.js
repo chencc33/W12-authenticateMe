@@ -17,7 +17,7 @@ const SpotListByUser = () => {
     return (
         <div className="main-body-div">
             {spotsByUserArr.map(({ id, address, avgRating, city, name, price, previewImage, state }) => (
-                <div className="card" onClick={() => { history.push(`/spots/${id}`) }}>
+                <div key={id} className="card" onClick={() => { history.push(`/spots/${id}`) }}>
                     <div key={id}>
                         <img className='card-image' src={previewImage} alt="PreviewImage" />
                         <div className='rating-container'>

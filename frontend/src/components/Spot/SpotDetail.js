@@ -84,10 +84,9 @@ const SpotDetail = () => {
                 }}>Delete</button>
             )}
             <hr></hr>
-            <div>
-                <div className='reviews-container'>
-                    <ReviewListBySpot spotId={spotId} />
-                </div>
+
+            <div className='reviews-container'>
+                <ReviewListBySpot spotId={spotId} />
             </div>
 
         </>
