@@ -1,0 +1,20 @@
+input {
+    width: 100%;
+}
+
+.login-form {
+    border: 1px solid gray;
+    width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.login-button {
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.login-button:hover {
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.168);
+}
