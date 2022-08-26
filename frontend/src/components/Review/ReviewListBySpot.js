@@ -22,6 +22,8 @@ const ReviewListBySpot = () => {
     const [showForm, setShowForm] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
+    const [showInstruction, setShowInstruction] = useState(true)
+    const [showCreateButton, setShowCreateButton] = useState(true)
 
     // console.log('****from component****', reviewsArr)
 
@@ -78,10 +80,16 @@ const ReviewListBySpot = () => {
             <div>
                 {showButton && !reviewsArr.length && (
                     <>
-                        <div className='create-review-instruction'>
+                        <div hidden={!showInstruction} className='create-review-instruction'>
                             There is no review yet. Want to create one?
                         </div>
-                        <div hidden={showForm} onClick={() => setShowForm(true)} className='button'>create</div>
+                        <div hidden={showForm} onClick={() => {
+                            setShowForm(true)
+                            setShowInstruction(false)
+                            setShowCreateButton(false)
+                        }} className='button'>
+                            {showCreateButton ? 'create' : null}
+                        </div>
                         {showForm && (
                             <form className='form-box'>
                                 <label>
