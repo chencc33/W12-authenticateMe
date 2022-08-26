@@ -42,7 +42,7 @@ const SpotForm = ({ spot, formType }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setHasSubmitted(!hasSubmitted)
+        setHasSubmitted(true)
         // console.log('*****spot from spot form *****', spot)
         // console.log('*****from spot form *****', previewImage)
         const data = {

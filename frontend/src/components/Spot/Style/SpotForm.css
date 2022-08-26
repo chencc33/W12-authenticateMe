@@ -35,6 +35,7 @@ input:invalid {
     background-color: ivory;
     outline: 2px solid red;
     accent-color: gold;
+    border-radius: 3px;
 }
 
 .button {

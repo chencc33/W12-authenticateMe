@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignUpForm.css';
 
 function SignupFormPage() {
     const dispatch = useDispatch();
+    const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -14,22 +15,38 @@ function SignupFormPage() {
     const [errors, setErrors] = useState([]);
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
+    // const [hasSubmitted, setHasSubmitted] = useState(false)
+
+
+    // useEffect(() => {
+    //     if (!firstName.length) errors.push('Please provide your first name')
+    //     if (!lastName.length) errors.push('Please provide your last name')
+    //     if (!(email.includes('@'))) errors.push('Please provide a valid email')
+    //     if (!(email.endsWith('com') || email.endsWith('io') || email.endsWith('org'))) errors.push('Please provide a valid email')
+    //     if (!username.length) errors.push('Please provide a username')
+    //     if (!password.length) errors.push('Please provide your password')
+    //     if (password !== confirmPassword) errors.push('Confirm Password field must be the same as the Password field')
+
+    //     setErrors(errors)
+
+    // }, [firstName, lastName, email, username, password])
 
     if (sessionUser) return <Redirect to="/" />;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // math password with confired password
         if (password === confirmPassword) {
             setErrors([]);
             return dispatch(sessionActions.signup({ firstName, lastName, email, username, password }))
                 .catch(async (res) => {
                     const data = await res.json();
+                    console.log('*****data****', data)
                     if (data && data.errors) setErrors(data.errors);
                 });
         }
         return setErrors(['Confirm Password field must be the same as the Password field']);
     };
+
     return (
         <form onSubmit={handleSubmit}>
             <ul>
@@ -87,8 +104,9 @@ function SignupFormPage() {
                     required
                 />
             </label>
-            <button type="submit">Sign Up</button>
+            <button type='submit'>Sign Up</button>
         </form>
+
     );
 }
 
