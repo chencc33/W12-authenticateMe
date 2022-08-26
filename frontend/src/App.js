@@ -39,10 +39,10 @@ function App() {
           <Route exact path='/spots'>
             <SpotList />
           </Route>
-          <Route exact path='/spots/current'>
+          <Route exact path='/current/spots'>
             <SpotListByUser />
           </Route>
-          <Route exact path='/spots/create'>
+          <Route exact path='/create/spots'>
             <CreateSpotForm />
           </Route>
           <Route exact path='/reviews/current'>

@@ -37,7 +37,10 @@ function Navigation({ isLoaded }) {
                     <div >
                         <NavLink exact to="/"><i className="fa-solid fa-house"></i></NavLink>
                     </div>
-                    <div className='hostButton' onClick={() => (history.push('/spots/create'))}>Become a Host</div>
+                    <div className='hostButton' onClick={() => {
+                        if (!sessionUser) window.alert(`Please login or signup first`)
+                        if (sessionUser) history.push(`/create/spots`)
+                    }}>Become a Host</div>
                     <div className='dropdown-container'>
                         <div className='dropdown-button'>
                             <i className="fa-solid fa-bars"></i>
