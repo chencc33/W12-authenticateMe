@@ -69,6 +69,10 @@
     text-decoration: none;
 }
 
+.dropdown-signup:hover {
+    background-color: rgba(128, 128, 128, 0.179);
+}
+
 .dropdown-logout {
     cursor: pointer;
     padding: 3px;
