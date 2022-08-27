@@ -11,50 +11,87 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-// Log in
-router.post(
-    '/',
-    async (req, res, next) => {
-        const { credential, password } = req.body;
-        const csrfToken = req.csrfToken();
-        const user = await User.login({ credential, password });
-        if (!credential || !password) {
-            res.status = 400
-            res.json({
-                message: "Validation error",
-                statusCode: 400,
-                errors: {
-                    credential: "Email or username is required",
-                    password: "Password is required"
-                }
-            })
-        }
-        //if no user returned, create error and invoke next err-handling
-        if (!user) {
-            // const err = new Error('Login failed');
-            res.status = 401;
-            // err.title = 'Login failed';
-            // err.errors = ['Invalid credentials'];
-            //     return next(err);
-            res.json({
-                message: 'Invalid credentials',
-                statusCode: 401
-            })
-        }
-        // if user returned, call the setTokenCookie method
-        await setTokenCookie(res, user);
+const validateLogin1 = [ // this middleware checks to see whether or not req.body.credential and req.body.password are empty.
+    check('credential')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Email or username is required"),
+    check('password')
+        .exists({ checkFalsy: true })
+        .withMessage("Password is required"),
+    handleValidationErrors
+];
 
-        return res.json({
-            id: user.id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            username: user.username,
-            email: user.email,
-            token: csrfToken
-        }
-        );
+
+// Log in
+router.post('/', validateLogin1, async (req, res, next) => {
+    const { credential, password } = req.body;
+
+    const user = await User.login({ credential, password });
+
+    if (!user) {
+        const err = new Error('Login failed');
+        err.status = 401;
+        err.title = 'Login failed';
+        err.errors = [{
+            "message": "Invalid credentials",
+            "statusCode": 401
+        }];
+        return next(err);
     }
-);
+
+    const token = await setTokenCookie(res, user)
+    user.dataValues.token = token
+    return res.json(
+        user
+    )
+
+})
+
+// // Log in
+// router.post(
+//     '/',
+//     async (req, res, next) => {
+//         const { credential, password } = req.body;
+//         const csrfToken = req.csrfToken();
+//         if (!credential || !password) {
+//             res.status = 400
+//             res.json({
+//                 message: "Validation error",
+//                 statusCode: 400,
+//                 errors: {
+//                     credential: "Email or username is required",
+//                     password: "Password is required"
+//                 }
+//             })
+//         }
+//         const user = await User.login({ credential, password });
+//         //if no user returned, create error and invoke next err-handling
+//         if (!user) {
+//             // const err = new Error('Login failed');
+//             res.status = 401;
+//             // err.title = 'Login failed';
+//             // err.errors = ['Invalid credentials'];
+//             //     return next(err);
+//             res.json({
+//                 message: 'Invalid credentials',
+//                 statusCode: 401
+//             })
+//         }
+//         // if user returned, call the setTokenCookie method
+//         await setTokenCookie(res, user);
+
+//         return res.json({
+//             id: user.id,
+//             firstName: user.firstName,
+//             lastName: user.lastName,
+//             username: user.username,
+//             email: user.email,
+//             token: csrfToken
+//         }
+//         );
+//     }
+// );
 
 // Log out  remove the token cookie from the response and return a JSON success message
 router.delete(
