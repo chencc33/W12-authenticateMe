@@ -6,6 +6,7 @@ import './Review.css'
 import { createReview } from '../../store/review'
 import ReviewDetail from './ReviewDetail'
 import './CreateReviewForm.css'
+import { Modal } from '../../context/Modal';
 
 const ReviewListBySpot = () => {
     const { spotId } = useParams()
@@ -24,6 +25,7 @@ const ReviewListBySpot = () => {
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [showInstruction, setShowInstruction] = useState(true)
     const [showCreateButton, setShowCreateButton] = useState(true)
+    const [showModal, setShowModal] = useState(false)
 
     // console.log('****from component****', reviewsArr)
 
@@ -49,8 +51,9 @@ const ReviewListBySpot = () => {
     useEffect(() => {
         let errors = []
         if (!review.length) errors.push('Please enter your review')
+        if (parseInt(stars) >= 6 || parseInt(stars) <= 0) errors.push('Please enter a star inbetween 1 to 5.')
         setValidationErrors(errors)
-    }, [review])
+    }, [review, stars])
 
     return (
         <>
@@ -83,14 +86,45 @@ const ReviewListBySpot = () => {
                         <div hidden={!showInstruction} className='create-review-instruction'>
                             There is no review yet. Want to create one?
                         </div>
-                        <div hidden={showForm} onClick={() => {
+                        <div onClick={() => setShowModal(true)}>Create</div>
+                        {showModal && (
+                            <Modal onClose={() => setShowModal(false)}>
+                                <form className='form-box'>
+                                    {validationErrors.length > 0 && hasSubmitted && (
+                                        <ul>
+                                            {validationErrors.map((error) => (
+                                                <li key={error}>{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                    <label>
+                                        review
+                                        <input
+                                            type='review'
+                                            value={review}
+                                            onChange={(e) => setReview(e.target.value)}
+                                        />
+                                    </label>
+                                    <label>
+                                        stars
+                                        <input
+                                            type='number'
+                                            value={stars}
+                                            onChange={(e) => setStars(e.target.value)}
+                                        />
+                                    </label>
+                                    <div onClick={handleSubmit} className='button'>submit</div>
+                                </form>
+                            </Modal>
+                        )}
+                        {/* <div hidden={showForm} onClick={() => {
                             setShowForm(true)
                             setShowInstruction(false)
                             setShowCreateButton(false)
                         }} className='button'>
                             {showCreateButton ? 'create' : null}
-                        </div>
-                        {showForm && (
+                        </div> */}
+                        {/* {showForm && (
                             <form className='form-box'>
                                 <label>
                                     review
@@ -110,7 +144,7 @@ const ReviewListBySpot = () => {
                                 </label>
                                 <div onClick={handleSubmit} className='button'>submit</div>
                             </form>
-                        )}
+                        )} */}
                     </>
                 )}
             </div>
