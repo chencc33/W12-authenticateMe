@@ -46,6 +46,8 @@ const ReviewListBySpot = () => {
         const data = { review, stars }
         setHasSubmitted(true)
         await dispatch(createReview(data, spotId))
+        window.location.reload()
+        // history.push(`/spots/${spotId}`)
     }
 
     useEffect(() => {

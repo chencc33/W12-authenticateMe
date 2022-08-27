@@ -20,8 +20,8 @@ const ReviewListByUser = () => {
                 <h2>All Reviews of Current User</h2>
                 {reviewByUserArr.map((review) => (
                     <ul>
-                        <li key={review.id}>
-                            <div>
+                        <li >
+                            <div key={review.id}>
                                 <div>
                                     Spot: {review.spotId}
                                 </div>
