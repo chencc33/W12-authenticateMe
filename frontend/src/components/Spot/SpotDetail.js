@@ -8,6 +8,7 @@ import { createOneSpot } from '../../store/spot'
 import './Style/SpotDetail.css'
 import EditSpotForm from './EditSpotForm'
 import ReviewListBySpot from '../Review/ReviewListBySpot'
+import { Modal } from '../../context/Modal';
 
 const SpotDetail = () => {
     const { spotId } = useParams()
@@ -23,6 +24,7 @@ const SpotDetail = () => {
     const targetSpot = oneSpot[spotId]
 
     const [showEditForm, setShowEditForm] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         dispatch(getOneSpot(spotId))
@@ -73,10 +75,18 @@ const SpotDetail = () => {
                 </>
             )
             }
-            {currentUserId == spotOwner && (
+            {/* {currentUserId == spotOwner && (
                 <div onClick={() => setShowEditForm(true)} className='button'>Edit</div>
+            )} */}
+            {currentUserId == spotOwner && (
+                <div onClick={() => setShowModal(true)} className='button'>Edit</div>
             )}
-            {showEditForm ? <EditSpotForm /> : null}
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <EditSpotForm />
+                </Modal>
+            )}
+            {/* {showEditForm ? <EditSpotForm /> : null} */}
             {currentUserId == spotOwner && (
                 <button onClick={async () => {
                     await dispatch(deleteOneSpot(spotId))

@@ -12,6 +12,7 @@ form {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
+    width: 600px;
 }
 
 label {
