@@ -47,7 +47,7 @@ const SpotDetail = () => {
                         <div className='intro-container'>
                             <div>
                                 <i className="fa-solid fa-star"></i>
-                                {targetSpot.avgStarRating}
+                                {Number.parseFloat(targetSpot.avgStarRating).toFixed(1)}
                                 &ensp;<i className="fa-solid fa-circle"></i>&ensp;
                                 {numReviews} reviews
                                 &ensp;<i className="fa-solid fa-circle"></i>&ensp;

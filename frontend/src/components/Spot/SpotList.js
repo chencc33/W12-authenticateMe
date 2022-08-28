@@ -29,7 +29,7 @@ const SpotList = () => {
                         <div className='intro-container'>
                             <div className='city-state'>{city}, {state}</div>
                             <div className='rating-container'>
-                                <i className="fa-solid fa-star">{avgRating}</i>
+                                <i className="fa-solid fa-star">{Number.parseFloat(avgRating).toFixed(1)}</i>
                             </div>
                         </div>
                         <div className='card-price'>${price} night</div>

@@ -22,7 +22,7 @@ const SpotListByUser = () => {
                         <div key={id}>
                             <img className='card-image' src={previewImage} alt="PreviewImage" />
                             <div className='rating-container'>
-                                <i className="fa-solid fa-star">{avgRating}</i>
+                                <i className="fa-solid fa-star">{Number.parseFloat(avgRating).toFixed(1)}</i>
                             </div>
                             <div>{name}</div>
                             <div>{address}</div>
