@@ -67,14 +67,14 @@ const SpotForm = ({ spot, formType }) => {
 
     return (
         <section>
-            {validationErrors.length > 0 && hasSubmitted && (
-                <ul>
-                    {validationErrors.map((error) => (
-                        <li key={error}>{error}</li>
-                    ))}
-                </ul>
-            )}
             <form className='form'>
+                {validationErrors.length > 0 && hasSubmitted && (
+                    <ul>
+                        {validationErrors.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                )}
                 <div>
                     <label>
                         Address
