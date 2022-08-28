@@ -5,7 +5,9 @@
     margin-bottom: 50px;
     max-width: 2500px;
     margin-top: 3%;
+    align-items: center;
 }
+
 
 .card {
     display: inline-block;
