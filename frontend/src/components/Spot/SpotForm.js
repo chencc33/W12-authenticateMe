@@ -49,7 +49,7 @@ const SpotForm = ({ spot, formType }) => {
         // console.log('*****spot from spot form *****', spot)
         // console.log('*****from spot form *****', previewImage)
         const data = {
-            ...spot, address, city, state, country, lat, lng, name, description, price, previewImage
+            ...spot, address, city, state, country, lat, lng, name, description, price: parseInt(price), previewImage
         }
         // console.log('*****spot from spot form *****', spot)
         if (formType === 'Create Spot') {
@@ -60,21 +60,22 @@ const SpotForm = ({ spot, formType }) => {
         } else {
             const updateSpot = await dispatch(updateOneSpot(data))
             if (updateSpot) {
-                history.push(`/spots`)
+                history.push(`/spots/${updateSpot.id}`)
+                // window.location.reload()
             }
         }
     }
 
     return (
         <section>
+            {validationErrors.length > 0 && hasSubmitted && (
+                <ul>
+                    {validationErrors.map((error) => (
+                        <li key={error}>{error}</li>
+                    ))}
+                </ul>
+            )}
             <form className='form'>
-                {validationErrors.length > 0 && hasSubmitted && (
-                    <ul>
-                        {validationErrors.map((error) => (
-                            <li key={error}>{error}</li>
-                        ))}
-                    </ul>
-                )}
                 <div>
                     <label>
                         Address
