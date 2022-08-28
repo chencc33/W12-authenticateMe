@@ -39,7 +39,7 @@ const SpotDetail = () => {
         <>
             {!showEditForm && (
                 <>
-                    <hr></hr>
+                    {/* <hr></hr> */}
                     <div className='spot-container'>
                         <h1 className='spot-title'>
                             {targetSpot.name}
