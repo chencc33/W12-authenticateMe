@@ -19,7 +19,7 @@ const ReviewDetail = () => {
 
     return (
         <>
-            <div className='singe-review-box'>
+            <div className='singe-review-container'>
                 <div className='review-content'>
                     Review:&ensp;{review.review}</div>
             </div>

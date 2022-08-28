@@ -78,14 +78,17 @@ const SpotDetail = () => {
             {/* {currentUserId == spotOwner && (
                 <div onClick={() => setShowEditForm(true)} className='button'>Edit</div>
             )} */}
-            {currentUserId == spotOwner && (
+            {/* {currentUserId == spotOwner && (
                 <div onClick={() => setShowModal(true)} className='button edit'>Edit</div>
+            )} */}
+            {currentUserId == spotOwner && (
+                <div onClick={() => { history.push(`/edit/spots/${spotId}`) }} className='button edit'>Edit</div>
             )}
-            {showModal && (
+            {/* {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <EditSpotForm />
                 </Modal>
-            )}
+            )} */}
             {/* {showEditForm ? <EditSpotForm /> : null} */}
             {currentUserId == spotOwner && (
                 <button className='button delete'

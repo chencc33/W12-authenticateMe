@@ -27,6 +27,8 @@ const SpotForm = ({ spot, formType }) => {
 
     useEffect(() => {
         let errors = []
+        console.log('*****price*****', typeof price)
+        console.log('*****price*****', parseFloat(price) % 1)
         if (!address.length) errors.push('Please provide your address')
         if (!city.length) errors.push('Please provide your city')
         if (!state.length) errors.push('Please provide your state')
@@ -37,7 +39,7 @@ const SpotForm = ({ spot, formType }) => {
         if (parseInt(lng) < -180 || parseInt(lng) > 181) errors.push('Please provide a valid longitutde')
         if (!name.length) errors.push('Please provide the spot name')
         if (!description.length) errors.push('Please provide the spot description')
-        if (price % 1 !== 0) errors.push('Please provide price as integer')
+        if (parseFloat(price) % 1 !== 0) errors.push('Please provide price as integer')
         if (!Number.isInteger(parseInt(price))) errors.push('Please provide the price as integer')
         if (!previewImage.length) errors.push('Please provide a a valid image url')
         setValidationErrors(errors)
@@ -58,24 +60,24 @@ const SpotForm = ({ spot, formType }) => {
                 history.push(`/spots/${newSpot.id}`)
             }
         } else {
-            const updateSpot = await dispatch(updateOneSpot(data))
-            if (updateSpot) {
-                history.push(`/spots/${updateSpot.id}`)
-                // window.location.reload()
-            }
+            dispatch(updateOneSpot(data))
+            history.push(`/spots/${spot.id}`)
+            // if (updateSpot) {
+            //     // window.location.reload()
+            // }
         }
     }
 
     return (
         <section>
-            {validationErrors.length > 0 && hasSubmitted && (
-                <ul>
-                    {validationErrors.map((error) => (
-                        <li key={error}>{error}</li>
-                    ))}
-                </ul>
-            )}
             <form className='form'>
+                {validationErrors.length > 0 && hasSubmitted && (
+                    <ul>
+                        {validationErrors.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                )}
                 <div>
                     <label>
                         Address
