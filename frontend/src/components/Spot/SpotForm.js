@@ -37,7 +37,7 @@ const SpotForm = ({ spot, formType }) => {
         if (parseInt(lng) < -180 || parseInt(lng) > 181) errors.push('Please provide a valid longitutde')
         if (!name.length) errors.push('Please provide the spot name')
         if (!description.length) errors.push('Please provide the spot description')
-        // if (parseInt(price).toFixed(2) !== parseInt(price)) errors.push('Please provide price as integer')
+        if (price % 1 !== 0) errors.push('Please provide price as integer')
         if (!Number.isInteger(parseInt(price))) errors.push('Please provide the price as integer')
         if (!previewImage.length) errors.push('Please provide a a valid image url')
         setValidationErrors(errors)
@@ -49,7 +49,7 @@ const SpotForm = ({ spot, formType }) => {
         // console.log('*****spot from spot form *****', spot)
         // console.log('*****from spot form *****', previewImage)
         const data = {
-            ...spot, address, city, state, country, lat, lng, name, description, price: parseInt(price), previewImage
+            ...spot, address, city, state, country, lat, lng, name, description, price, previewImage
         }
         // console.log('*****spot from spot form *****', spot)
         if (formType === 'Create Spot') {
