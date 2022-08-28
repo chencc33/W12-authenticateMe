@@ -88,7 +88,7 @@ const ReviewListBySpot = () => {
                         <div hidden={!showInstruction} className='create-review-instruction'>
                             There is no review yet. Want to create one?
                         </div>
-                        <div onClick={() => setShowModal(true)}>Create</div>
+                        <div onClick={() => setShowModal(true)} className='button'>Create</div>
                         {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
                                 <form className='form-box'>

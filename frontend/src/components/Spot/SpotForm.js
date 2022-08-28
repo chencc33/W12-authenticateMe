@@ -71,7 +71,7 @@ const SpotForm = ({ spot, formType }) => {
                     ))}
                 </ul>
             )}
-            <form>
+            <form className='form'>
                 <div>
                     <label>
                         Address
