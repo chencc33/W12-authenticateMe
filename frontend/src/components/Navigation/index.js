@@ -29,14 +29,14 @@ function Navigation({ isLoaded }) {
     return (
         <>
             <div className='nav-bar'>
-                <div className='logo-container'>
+                <div className='logo-container' onClick={() => { history.push('/') }}>
                     <i className="fa-solid fa-heart"></i>
-                    <div className='logo-font'>Sweet Home</div>
+                    <div className='logo-font'>Acebnb</div>
                 </div>
                 <div className='nav-bar-right'>
-                    <div >
+                    {/* <div >
                         <NavLink exact to="/"><i className="fa-solid fa-house"></i></NavLink>
-                    </div>
+                    </div> */}
                     <div className='hostButton' onClick={() => {
                         if (!sessionUser) window.alert(`Please login or signup first`)
                         if (sessionUser) history.push(`/create/spots`)
@@ -66,9 +66,11 @@ function Navigation({ isLoaded }) {
                                     </>
                                 )}
                             </div>
-                            <div>
-                                <DemoUserLogin />
-                            </div>
+                            {!sessionUser && (
+                                <div>
+                                    <DemoUserLogin />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -28,7 +28,7 @@ const SpotDetail = () => {
 
     useEffect(() => {
         dispatch(getOneSpot(spotId))
-    }, [dispatch])
+    }, [dispatch, reviews])
 
     let currentUserId
     if (!targetSpot) return null
@@ -79,7 +79,7 @@ const SpotDetail = () => {
                 <div onClick={() => setShowEditForm(true)} className='button'>Edit</div>
             )} */}
             {currentUserId == spotOwner && (
-                <div onClick={() => setShowModal(true)} className='button'>Edit</div>
+                <div onClick={() => setShowModal(true)} className='button edit'>Edit</div>
             )}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
@@ -88,10 +88,11 @@ const SpotDetail = () => {
             )}
             {/* {showEditForm ? <EditSpotForm /> : null} */}
             {currentUserId == spotOwner && (
-                <button onClick={async () => {
-                    await dispatch(deleteOneSpot(spotId))
-                    history.push('/spots')
-                }}>Delete</button>
+                <button className='button delete'
+                    onClick={async () => {
+                        await dispatch(deleteOneSpot(spotId))
+                        history.push('/spots')
+                    }}>Delete</button>
             )}
             <hr></hr>
 

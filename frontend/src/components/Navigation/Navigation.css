@@ -145,6 +145,10 @@
     margin-left: 10%;
 }
 
+.logo-container:hover {
+    cursor: pointer;
+}
+
 .fa-heart {
     margin-right: 10px;
     align-items: center;

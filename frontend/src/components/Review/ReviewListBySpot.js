@@ -46,8 +46,8 @@ const ReviewListBySpot = () => {
         const data = { review, stars }
         setHasSubmitted(true)
         await dispatch(createReview(data, spotId))
-        window.location.reload()
-        // history.push(`/spots/${spotId}`)
+        // window.location.reload()
+        history.push(`/spots/${spotId}`)
     }
 
     useEffect(() => {
@@ -86,9 +86,9 @@ const ReviewListBySpot = () => {
                 {showButton && !reviewsArr.length && (
                     <>
                         <div hidden={!showInstruction} className='create-review-instruction'>
-                            There is no review yet. Want to create one?
+                            There is no review yet.
                         </div>
-                        <div onClick={() => setShowModal(true)} className='button'>Create</div>
+                        {logInUserId && (<div onClick={() => setShowModal(true)} className='button'>Create</div>)}
                         {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
                                 <form className='form-box'>
