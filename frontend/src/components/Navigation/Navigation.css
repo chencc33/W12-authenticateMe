@@ -1,10 +1,13 @@
 .nav-bar {
     display: flex;
     justify-content: space-between;
+    max-width: 2500px;
 }
 
 .nav-bar-right {
     display: flex;
+    margin-right: 8%;
+    width: 20%;
 }
 
 .hostButton {
@@ -16,7 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 10%;
 }
 
 .hostButton:hover {
@@ -65,11 +68,11 @@
 
 
 .dropdown-container {
-    border: 1px black solid;
-    border-radius: 10px;
+    /* border: 1px black solid; */
+    /* border-radius: 10px; */
     font-size: 30px;
     position: relative;
-    margin-right: 30px;
+    margin-right: 30%;
 }
 
 .dropdown-content {
@@ -102,7 +105,7 @@
     text-decoration: none;
 }
 
-.dropdown-myreviews:hover {
+.dropdown-myspot:hover {
     background-color: rgba(128, 128, 128, 0.076);
 }
 
