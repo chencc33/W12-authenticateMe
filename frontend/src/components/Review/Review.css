@@ -1,5 +1,7 @@
 .main-body-div {
     margin-bottom: 50px;
+    height: fit-content;
+    display: block;
 }
 
 .footer {
