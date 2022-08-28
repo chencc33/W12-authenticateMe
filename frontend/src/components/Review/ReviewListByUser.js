@@ -16,7 +16,7 @@ const ReviewListByUser = () => {
 
     return (
         <>
-            <div>
+            <div className='main-body-div'>
                 <h2>All Reviews of Current User</h2>
                 {reviewByUserArr.map((review) => (
                     <ul>
@@ -37,6 +37,10 @@ const ReviewListByUser = () => {
                     </ul>
                 ))}
             </div>
+            <footer className='footer'>
+                <hr></hr>
+                @2022, Inc
+            </footer>
         </>
     )
 }

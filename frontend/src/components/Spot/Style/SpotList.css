@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     margin-left: 10%;
+    margin-bottom: 50px;
 }
 
 .card {
@@ -69,4 +70,14 @@
     color: #333;
     background-color: #fff;
     border-color: #ccc;
+}
+
+.footer {
+    position: fixed;
+    height: 50px;
+    background-color: white;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
 }

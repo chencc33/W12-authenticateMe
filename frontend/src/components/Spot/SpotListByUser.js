@@ -15,22 +15,26 @@ const SpotListByUser = () => {
     }, [dispatch])
 
     return (
-        <div className="main-body-div">
-            {spotsByUserArr.map(({ id, address, avgRating, city, name, price, previewImage, state }) => (
-                <div key={id} className="card" onClick={() => { history.push(`/spots/${id}`) }}>
-                    <div key={id}>
-                        <img className='card-image' src={previewImage} alt="PreviewImage" />
-                        <div className='rating-container'>
-                            <i className="fa-solid fa-star">{avgRating}</i>
+        <>
+
+            <div className="main-body-div">
+                {spotsByUserArr.map(({ id, address, avgRating, city, name, price, previewImage, state }) => (
+                    <div key={id} className="card" onClick={() => { history.push(`/spots/${id}`) }}>
+                        <div key={id}>
+                            <img className='card-image' src={previewImage} alt="PreviewImage" />
+                            <div className='rating-container'>
+                                <i className="fa-solid fa-star">{avgRating}</i>
+                            </div>
+                            <div>{name}</div>
+                            <div>{address}</div>
+                            <div>{city},{state}</div>
+                            <div className='card-price'>${price} night</div>
                         </div>
-                        <div>{name}</div>
-                        <div>{address}</div>
-                        <div>{city},{state}</div>
-                        <div className='card-price'>${price} night</div>
                     </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </div>
+            <footer className="footer"> @2022 Sweetbnb, Inc</footer>
+        </>
     )
 }
 

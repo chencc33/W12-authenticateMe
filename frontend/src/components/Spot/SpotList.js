@@ -38,6 +38,10 @@ const SpotList = () => {
             </div>
             {/* <div className='button' hidden={showForm} onClick={() => setShowForm(true)}>Create a New Spot</div>
             {showForm ? <CreateSpotForm /> : null} */}
+            <footer className='footer'>
+                <hr></hr>
+                @2022 Sweetbnb, Inc
+            </footer>
         </>
     )
 }
