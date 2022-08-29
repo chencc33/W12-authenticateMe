@@ -27,8 +27,8 @@ const SpotForm = ({ spot, formType }) => {
 
     useEffect(() => {
         let errors = []
-        console.log('*****price*****', typeof price)
-        console.log('*****price*****', parseFloat(price) % 1)
+        // console.log('*****price*****', typeof price)
+        // console.log('*****price*****', parseFloat(price) % 1)
         if (!address.length) errors.push('Please provide your address')
         if (!city.length) errors.push('Please provide your city')
         if (!state.length) errors.push('Please provide your state')

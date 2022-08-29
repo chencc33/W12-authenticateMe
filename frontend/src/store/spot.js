@@ -72,13 +72,13 @@ export const getOneSpot = (spotId) => async dispatch => {
 
 // Create One spot
 export const createOneSpot = (data) => async dispatch => {
-    console.log('****before response****')
+    // console.log('****before response****')
     const response = await csrfFetch(`/api/spots`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
-    console.log('****after response****')
+    // console.log('****after response****')
     if (response.ok) {
         const spot = await response.json()
         // console.log('***from thunk***', spot)
@@ -145,7 +145,7 @@ const spotReducer = (state = initialState, action) => {
         case ADD_ONE:
             let newState = { ...state }
             newState[action.spot.id] = action.spot
-            console.log('**add one from reducer**', newState)
+            // console.log('**add one from reducer**', newState)
             return newState
         case UPDATE_ONE:
             let updateState = { ...state }
