@@ -60,13 +60,13 @@ const ReviewListBySpot = () => {
     return (
         <>
             <div>
-                {validationErrors.length > 0 && hasSubmitted && (
+                {/* {validationErrors.length > 0 && hasSubmitted && (
                     <ul>
                         {validationErrors.map((error) => (
                             <li key={error}>{error}</li>
                         ))}
                     </ul>
-                )}
+                )} */}
                 {reviewsArr.length > 0 && (
                     <div>
                         {reviewsArr.map((review) => (
