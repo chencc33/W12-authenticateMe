@@ -82,7 +82,7 @@ const SpotDetail = () => {
                 <div onClick={() => setShowModal(true)} className='button edit'>Edit</div>
             )} */}
             {currentUserId == spotOwner && (
-                <div onClick={() => { history.push(`/edit/spots/${spotId}`) }} className='button edit'>Edit</div>
+                <div onClick={() => { history.push(`/edit/spots/${spotId}`) }} className='button-edit'>Edit</div>
             )}
             {/* {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
