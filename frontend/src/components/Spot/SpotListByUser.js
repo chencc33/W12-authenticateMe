@@ -16,6 +16,10 @@ const SpotListByUser = () => {
 
     return (
         <>
+            {!spotsByUserArr.length && (
+                <h1 style={{ textAlign: 'center' }}>The current user has no spot yet.</h1>
+            )
+            }
             <div className="main-body-div">
                 {spotsByUserArr.map(({ id, address, avgRating, city, name, price, previewImage, state }) => (
                     <div key={id} className="card" onClick={() => { history.push(`/spots/${id}`) }}>

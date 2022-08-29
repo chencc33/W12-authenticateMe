@@ -17,8 +17,10 @@ const ReviewListByUser = () => {
 
     return (
         <>
+            {!reviewByUserArr.length && (
+                <h1 style={{ textAlign: 'center' }}>The current user has not created any review yet.</h1>
+            )}
             <div className='main-body-div'>
-                <h2>All Reviews of Current User</h2>
                 {reviewByUserArr.map((review) => (
                     <div className='singe-review-box' key={review.id} onClick={() => { history.push(`/reviews/${review.id}`) }}>
                         <div>
