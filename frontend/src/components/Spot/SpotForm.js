@@ -31,8 +31,8 @@ const SpotForm = ({ spot, formType }) => {
         if (!city.length) errors.push('Please provide your city')
         if (!state.length) errors.push('Please provide your state')
         if (!country.length) errors.push('Please provide the country')
-        if (!lat) errors.push('Please provide a valid latitude')
-        if (parseInt(lat) < -91 || parseInt(lat) >= 91) errors.push('Please provide a valid latitude')
+        if (!lat || lat <= -91 || lat >= 91) errors.push('Please provide a valid latitude')
+        // if (parseInt(lat) < -91 || parseInt(lat) >= 91) errors.push('Please provide a valid latitude')
         if (!lng) errors.push('Please provide a valid longitude')
         if (parseInt(lng) < -180 || parseInt(lng) >= 181) errors.push('Please provide a valid longitutde')
         if (!name.length) errors.push('Please provide the spot name')
@@ -42,9 +42,10 @@ const SpotForm = ({ spot, formType }) => {
         if (!Number.isInteger(parseInt(price))) errors.push('Please provide the price as integer')
         if (!previewImage.length) errors.push('Please provide a a valid image url')
         setValidationErrors(errors)
-    }, [address, city, state, country, lat, lng, name, description, price, previewImage])
+    }, [address, city, state, country, lat, lng, name, description, price, previewImage, validationErrors])
 
     const handleSubmit = async (e) => {
+        console.log("how many erros", validationErrors.length)
         e.preventDefault()
         setHasSubmitted(true)
         // console.log('*****spot from spot form *****', spot)
@@ -62,6 +63,9 @@ const SpotForm = ({ spot, formType }) => {
             const updateSpot = await dispatch(updateOneSpot(data))
             history.push(`/spots/${updateSpot.id}`)
         }
+
+        setHasSubmitted(false)
+        setValidationErrors([])
     }
 
     return (
@@ -81,6 +85,7 @@ const SpotForm = ({ spot, formType }) => {
                             type='text'
                             value={address}
                             placeholder='Address'
+                            required
                             onChange={(e) => setAddress(e.target.value)} />
                     </label>
                 </div>
@@ -91,6 +96,7 @@ const SpotForm = ({ spot, formType }) => {
                             type='text'
                             value={city}
                             placeholder='City'
+                            required
                             onChange={(e) => setCity(e.target.value)} />
                     </label>
                 </div>
@@ -100,6 +106,7 @@ const SpotForm = ({ spot, formType }) => {
                         <input
                             type='text'
                             value={state}
+                            required
                             placeholder='State'
                             onChange={(e) => setState(e.target.value)} />
                     </label>
@@ -110,6 +117,7 @@ const SpotForm = ({ spot, formType }) => {
                         <input
                             type='text'
                             value={country}
+                            required
                             placeholder='Country'
                             onChange={(e) => setCountry(e.target.value)} />
                     </label>
@@ -120,6 +128,7 @@ const SpotForm = ({ spot, formType }) => {
                         <input
                             type='number'
                             value={lat}
+                            required
                             placeholder='Latitude (-90 to 90)'
                             onChange={(e) => setLat(e.target.value)} />
                     </label>
@@ -130,6 +139,7 @@ const SpotForm = ({ spot, formType }) => {
                         <input
                             type='number'
                             value={lng}
+                            required
                             placeholder='Longitude (-180 to 180)'
                             onChange={(e) => setLng(e.target.value)} />
                     </label>
@@ -141,6 +151,7 @@ const SpotForm = ({ spot, formType }) => {
                             type='text'
                             value={name}
                             placeholder='Name'
+                            required
                             onChange={(e) => setName(e.target.value)} />
                     </label>
                 </div>
@@ -150,6 +161,7 @@ const SpotForm = ({ spot, formType }) => {
                         <input
                             type='text'
                             value={description}
+                            required
                             placeholder='Description'
                             onChange={(e) => setDescription(e.target.value)} />
                     </label>
@@ -160,6 +172,7 @@ const SpotForm = ({ spot, formType }) => {
                         <input
                             type='number'
                             value={price}
+                            required
                             placeholder='Enter a postive integer'
                             onChange={(e) => setPrice(e.target.value)} />
                     </label>
@@ -170,12 +183,12 @@ const SpotForm = ({ spot, formType }) => {
                         <input
                             type='url'
                             value={previewImage}
+                            required
                             placeholder='Image Url'
                             onChange={(e) => setPreviewImage(e.target.value)} />
                     </label>
                 </div>
-                <div onClick={handleSubmit} className='button' value={formType}>{formType}</div>
-
+                <div onClick={handleSubmit} disabled={validationErrors.length > 0} className='button' value={formType}>{formType}</div>
             </form>
         </section>
     )
