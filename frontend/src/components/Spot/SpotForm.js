@@ -37,7 +37,7 @@ const SpotForm = ({ spot, formType }) => {
         if (parseInt(lng) < -180 || parseInt(lng) > 181) errors.push('Please provide a valid longitutde')
         if (!name.length) errors.push('Please provide the spot name')
         if (!description.length) errors.push('Please provide the spot description')
-        if (price <= 0) errors.push('Please provide a valid price')
+        if (parseInt(price) < 0) errors.push('Please provide a valid price')
         if (parseFloat(price) % 1 !== 0) errors.push('Please provide price as integer')
         if (!Number.isInteger(parseInt(price))) errors.push('Please provide the price as integer')
         if (!previewImage.length) errors.push('Please provide a a valid image url')
