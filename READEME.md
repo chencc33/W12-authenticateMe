@@ -1,7 +1,7 @@
 # Welcome to the Acebnb wiki!
 
 Acebnb is web application inspired by Airbnb that it provides an online marketplace for lodging, primarily homestay for vacation rentals and tourism activities.
-[Click here to view WonderlandBnB  Live Site](https://authenme.herokuapp.com/)
+[Click here to view Live Site](https://authenme.herokuapp.com/)
 
 
 
