@@ -31,7 +31,7 @@ const SpotForm = ({ spot, formType }) => {
         if (!city.length) errors.push('Please provide your city')
         if (!state.length) errors.push('Please provide your state')
         if (!country.length) errors.push('Please provide the country')
-        if (!lat || lat <= -91 || lat >= 91) errors.push('Please provide a valid latitude')
+        if (!lat || parseInt(lat) <= -91 || parseInt(lat) >= 91) errors.push('Please provide a valid latitude')
         // if (parseInt(lat) < -91 || parseInt(lat) >= 91) errors.push('Please provide a valid latitude')
         if (!lng) errors.push('Please provide a valid longitude')
         if (parseInt(lng) < -180 || parseInt(lng) >= 181) errors.push('Please provide a valid longitutde')
@@ -42,14 +42,15 @@ const SpotForm = ({ spot, formType }) => {
         if (!Number.isInteger(parseInt(price))) errors.push('Please provide the price as integer')
         if (!previewImage.length) errors.push('Please provide a a valid image url')
         setValidationErrors(errors)
-    }, [address, city, state, country, lat, lng, name, description, price, previewImage, validationErrors])
+    }, [address, city, state, country, lat, lng, name, description, price, previewImage])
 
     const handleSubmit = async (e) => {
-        console.log("how many erros", validationErrors.length)
+        // console.log("how many erros", validationErrors.length)
         e.preventDefault()
         setHasSubmitted(true)
         // console.log('*****spot from spot form *****', spot)
         // console.log('*****from spot form *****', previewImage)
+        if (validationErrors.length > 0) return alert('Please fix the errors first')
         const data = {
             ...spot, address, city, state, country, lat, lng, name, description, price: parseInt(price), previewImage
         }
@@ -64,8 +65,8 @@ const SpotForm = ({ spot, formType }) => {
             history.push(`/spots/${updateSpot.id}`)
         }
 
-        setHasSubmitted(false)
-        setValidationErrors([])
+        // setHasSubmitted(false)
+        // setValidationErrors([])
     }
 
     return (
@@ -188,7 +189,7 @@ const SpotForm = ({ spot, formType }) => {
                             onChange={(e) => setPreviewImage(e.target.value)} />
                     </label>
                 </div>
-                <div onClick={handleSubmit} disabled={validationErrors.length > 0} className='button' value={formType}>{formType}</div>
+                <div onClick={handleSubmit} className='button' value={formType}>{formType}</div>
             </form>
         </section>
     )
