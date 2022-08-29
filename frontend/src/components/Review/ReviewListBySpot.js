@@ -151,11 +151,34 @@ const ReviewListBySpot = () => {
                 )}
             </div>
             <div>
-
                 {showButton && reviewsArr.length > 0 && (
                     <>
-                        <div hidden={showForm} onClick={() => setShowForm(true)} className='button'>create</div>
-                        {showForm && (
+                        {logInUserId && (<div onClick={() => setShowModal(true)} className='button'>Create</div>)}
+                        {/* <div hidden={showForm} onClick={() => setShowForm(true)} className='button'>create</div> */}
+                        {showModal && (
+                            <Modal onClose={() => setShowModal(false)}>
+                                <form>
+                                    <label>
+                                        review
+                                        <input
+                                            type='review'
+                                            value={review}
+                                            onChange={(e) => setReview(e.target.value)}
+                                        />
+                                    </label>
+                                    <label>
+                                        stars
+                                        <input
+                                            type='number'
+                                            value={stars}
+                                            onChange={(e) => setStars(e.target.value)}
+                                        />
+                                    </label>
+                                    <div onClick={handleSubmit} className='form-button'>submit</div>
+                                </form>
+                            </Modal>
+                        )}
+                        {/* {showForm && (
                             <form>
                                 <label>
                                     review
@@ -175,7 +198,7 @@ const ReviewListBySpot = () => {
                                 </label>
                                 <div onClick={handleSubmit} className='form-button'>submit</div>
                             </form>
-                        )}
+                        )} */}
                     </>
                 )}
             </div>

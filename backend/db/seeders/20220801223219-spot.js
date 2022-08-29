@@ -57,7 +57,7 @@ module.exports = {
         city: "Page",
         state: "Arizona",
         country: "United States",
-        lat: 465.7645358,
+        lat: 60.7645358,
         lng: -48.4730327,
         name: "Acre's Away Land",
         description: "Escape to a beautifully renovated cabin on an acre of land in the beautiful Pine forest.",
