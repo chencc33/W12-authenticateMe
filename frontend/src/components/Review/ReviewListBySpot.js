@@ -158,6 +158,13 @@ const ReviewListBySpot = () => {
                         {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
                                 <form>
+                                    {validationErrors.length > 0 && hasSubmitted && (
+                                        <ul>
+                                            {validationErrors.map((error) => (
+                                                <li key={error}>{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
                                     <label>
                                         review
                                         <input
