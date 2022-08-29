@@ -59,8 +59,8 @@ const SpotForm = ({ spot, formType }) => {
                 history.push(`/spots/${newSpot.id}`)
             }
         } else {
-            dispatch(updateOneSpot(data))
-            history.push(`/spots/${spot.id}`)
+            const updateSpot = await dispatch(updateOneSpot(data))
+            history.push(`/spots/${updateSpot.id}`)
         }
     }
 
