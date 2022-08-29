@@ -53,7 +53,7 @@ const ReviewListBySpot = () => {
     useEffect(() => {
         let errors = []
         if (!review.length) errors.push('Please enter your review')
-        if (parseInt(stars) >= 6 || parseInt(stars) <= 0) errors.push('Please enter a star inbetween 1 to 5.')
+        if (parseInt(stars) >= 6 || parseInt(stars) <= 0 || parseFloat(stars) % 1 !== 0) errors.push('Please enter a star as integer inbetween 1 to 5.')
         setValidationErrors(errors)
     }, [review, stars])
 
