@@ -1,33 +1,60 @@
-# Create React App Template
+# Welcome to the Acebnb wiki!
 
-A no-frills template from which to create React applications with
-[Create React App](https://github.com/facebook/create-react-app).
+Acebnb is web application inspired by Airbnb that it provides an online marketplace for lodging, primarily homestay for vacation rentals and tourism activities.
+[Click here to view WonderlandBnB  Live Site](https://authenme.herokuapp.com/)
 
-```sh
-npx create-react-app my-app --template @appacademy/simple --use-npm
-```
 
-## Available Scripts
 
-In the project directory, you can run:
+Plese see below links to project Wiki
 
-### `npm start`
+* [Feature List](https://github.com/chencc33/W12-authenticateMe/wiki/Feature-List)
+* [Database Schema](https://github.com/chencc33/W12-authenticateMe/wiki/DataBase-Schema)
+* [Api Routes](https://github.com/chencc33/W12-authenticateMe/wiki/API-Documentation)
+* [Redux Store State Shape](https://github.com/chencc33/W12-authenticateMe/wiki/Redux-State-Shape)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This Project is built with:
+* JavaScript
+* PostgreSQL
+* Sequelize
+* Express
+* React
+* Redux
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Features Directions:
 
-### `npm test`
+## Home Page Demo User:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You will be able to test the features without sign up by click on the "Demo User" button. -
 
-### `npm run build`
+Log in page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+your pic
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+
+Sign up page:
+your pic
+
+
+Home page:
+
+your pic
+
+
+Spot Detail page:
+
+your pic
+
+
+Create Spot page:
+
+your pic
+
+
+Managing Spots page:
+
+your pic
+
+
+Managing Reviews page:
+
+your pic
