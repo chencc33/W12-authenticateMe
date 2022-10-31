@@ -70,7 +70,7 @@ input:invalid {
     border-radius: 8px;
     text-decoration: none;
 
-    color: #333;
-    background-color: rgb(253, 251, 251);
-    border-color: #ccc;
+    background-color: rgb(255, 56, 92);
+    color: whitesmoke;
+    border: none
 }

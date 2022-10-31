@@ -28,7 +28,7 @@ const ReviewDetail = () => {
             </div>
 
             {logInUserId === reviewUserId ? (
-                <button className='button' onClick={async () => {
+                <button className='delete-button review-detail-delete' onClick={async () => {
                     await dispatch(deleteReview(reviewId))
                     history.push('/reviews/current')
                 }}>Delete</button>

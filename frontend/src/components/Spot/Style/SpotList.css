@@ -74,17 +74,42 @@
     border-radius: 4px;
     text-decoration: none;
 
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
+    background-color: rgb(255, 56, 92);
+    color: whitesmoke;
+    border: none
 }
 
-.footer {
+.mainpage-footer {
     position: fixed;
-    height: 50px;
+    display: flex;
+    flex-direction: column;
+    height: 80px;
     background-color: white;
-    bottom: 0px;
+    bottom: 0;
     left: 0px;
     right: 0px;
     margin-bottom: 0px;
+}
+
+.developer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.developer-links-container {
+    display: flex;
+    column-gap: 20px;
+}
+
+.fa-linkedin {
+    font-size: 30px;
+    color: black;
+}
+
+.fa-github {
+    font-size: 30px;
+    color: black;
 }

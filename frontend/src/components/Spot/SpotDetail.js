@@ -48,10 +48,8 @@ const SpotDetail = () => {
                             <div>
                                 <i className="fa-solid fa-star"></i>
                                 {Number.parseFloat(targetSpot.avgStarRating).toFixed(1)}
-                                &ensp;<i className="fa-solid fa-circle"></i>&ensp;
-                                {numReviews} reviews
-                                &ensp;<i className="fa-solid fa-circle"></i>&ensp;
-                                {targetSpot.city}, {targetSpot.state}, {targetSpot.country}
+                                <span className='dot-seperator'>&ensp;&#183;&ensp;</span>{numReviews} reviews
+                                <span>&ensp;&#183;&ensp;</span>{targetSpot.city}, {targetSpot.state}, {targetSpot.country}
                             </div>
                         </div>
                         <div className='detail-card'>
@@ -75,27 +73,17 @@ const SpotDetail = () => {
                 </>
             )
             }
-            {/* {currentUserId == spotOwner && (
-                <div onClick={() => setShowEditForm(true)} className='button'>Edit</div>
-            )} */}
-            {/* {currentUserId == spotOwner && (
-                <div onClick={() => setShowModal(true)} className='button edit'>Edit</div>
-            )} */}
+
             {currentUserId == spotOwner && (
                 <div onClick={() => { history.push(`/edit/spots/${spotId}`) }} className='button-edit'>Edit</div>
             )}
-            {/* {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    <EditSpotForm />
-                </Modal>
-            )} */}
-            {/* {showEditForm ? <EditSpotForm /> : null} */}
+
             {currentUserId == spotOwner && (
-                <button className='button delete'
+                <div className='delete-button'
                     onClick={async () => {
                         await dispatch(deleteOneSpot(spotId))
                         history.push('/spots')
-                    }}>Delete</button>
+                    }}>Delete</div>
             )}
             <hr></hr>
 

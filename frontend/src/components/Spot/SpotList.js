@@ -9,9 +9,9 @@ const SpotList = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const spots = useSelector((state) => state.spots)
+    console.log('******from component*******', spots)
     const spotsArr = Object.values(spots)
     const [showForm, setShowForm] = useState(false)
-    // console.log('spots from useSlector', spots)
     // console.log('spotArr in component', spotsArr)
 
     useEffect(() => {
@@ -36,12 +36,25 @@ const SpotList = () => {
                     </div>
                 ))}
             </div>
-            {/* <div className='button' hidden={showForm} onClick={() => setShowForm(true)}>Create a New Spot</div>
-            {showForm ? <CreateSpotForm /> : null} */}
-            <footer className='footer'>
-                <hr></hr>
-                @2022 Sweetbnb, Inc
-            </footer>
+
+            <div className='mainpage-footer'>
+                <div className='developer-container'>
+                    <div>Chen Chen</div>
+                    <div className='developer-links-container'>
+                        <div className='developer-link'>
+                            <a href='https://www.linkedin.com/in/chencc33/' target="_blank">
+                                <i className="fa-brands fa-linkedin"></i>
+                            </a>
+                        </div>
+                        <div className='developer-link'>
+                            <a href='https://github.com/chencc33' target="_blank">
+                                <i className="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </>
     )
 }

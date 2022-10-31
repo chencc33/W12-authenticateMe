@@ -43,6 +43,7 @@ export const getAllSpots = () => async dispatch => {
 
     if (response.ok) {
         const spots = await response.json()
+        console.log('*********From Thunk******', spots)
         dispatch(loadSpotsAction(spots))
         return spots
     }
@@ -126,7 +127,7 @@ const spotReducer = (state = initialState, action) => {
             spotsArr.forEach((spot) => {
                 allSpotsObj[spot.id] = spot
             })
-            // console.log('allSpotsObj', allSpotsObj)
+            console.log('**********from Reducer********', allSpotsObj)
             return { ...allSpotsObj }
         case LOAD_SPOT_USER:
             const allSpotByUserObj = {}

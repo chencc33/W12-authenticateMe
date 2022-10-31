@@ -52,18 +52,20 @@ function Navigation({ isLoaded }) {
                             </div>
                             <div className='dropdown-myspot'>
                                 {sessionUser && (
-                                    <>
+                                    <div>
+                                        <i className="fa-solid fa-house"></i>
                                         <NavLink to='/current/spots'>My Spot</NavLink>
-                                        <hr></hr>
-                                    </>
+
+                                    </div>
                                 )}
                             </div>
                             <div className='dropdown-myreviews'>
                                 {sessionUser && (
-                                    <>
+                                    <div>
+                                        <i className="fa-solid fa-star"></i>
                                         <NavLink to='/reviews/current'>My Reviews</NavLink>
-                                        <hr></hr>
-                                    </>
+
+                                    </div>
                                 )}
                             </div>
                             {!sessionUser && (

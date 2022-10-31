@@ -60,13 +60,6 @@ const ReviewListBySpot = () => {
     return (
         <>
             <div>
-                {/* {validationErrors.length > 0 && hasSubmitted && (
-                    <ul>
-                        {validationErrors.map((error) => (
-                            <li key={error}>{error}</li>
-                        ))}
-                    </ul>
-                )} */}
                 {reviewsArr.length > 0 && (
                     <div>
                         {reviewsArr.map((review) => (
@@ -88,7 +81,7 @@ const ReviewListBySpot = () => {
                         <div hidden={!showInstruction} className='create-review-instruction'>
                             There is no review yet.
                         </div>
-                        {logInUserId && (<div onClick={() => setShowModal(true)} className='button'>Create</div>)}
+                        {logInUserId && (<div onClick={() => setShowModal(true)} className='button'>Write a review</div>)}
                         {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
                                 <form className='form-box'>
@@ -119,42 +112,13 @@ const ReviewListBySpot = () => {
                                 </form>
                             </Modal>
                         )}
-                        {/* <div hidden={showForm} onClick={() => {
-                            setShowForm(true)
-                            setShowInstruction(false)
-                            setShowCreateButton(false)
-                        }} className='button'>
-                            {showCreateButton ? 'create' : null}
-                        </div> */}
-                        {/* {showForm && (
-                            <form className='form-box'>
-                                <label>
-                                    review
-                                    <input
-                                        type='review'
-                                        value={review}
-                                        onChange={(e) => setReview(e.target.value)}
-                                    />
-                                </label>
-                                <label>
-                                    stars
-                                    <input
-                                        type='number'
-                                        value={stars}
-                                        onChange={(e) => setStars(e.target.value)}
-                                    />
-                                </label>
-                                <div onClick={handleSubmit} className='button'>submit</div>
-                            </form>
-                        )} */}
                     </>
                 )}
             </div>
             <div>
                 {showButton && reviewsArr.length > 0 && (
                     <>
-                        {logInUserId && (<div onClick={() => setShowModal(true)} className='button'>Create</div>)}
-                        {/* <div hidden={showForm} onClick={() => setShowForm(true)} className='button'>create</div> */}
+                        {logInUserId && (<div onClick={() => setShowModal(true)} className='button create-review'>Write a review</div>)}
                         {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
                                 <form>
@@ -185,27 +149,6 @@ const ReviewListBySpot = () => {
                                 </form>
                             </Modal>
                         )}
-                        {/* {showForm && (
-                            <form>
-                                <label>
-                                    review
-                                    <input
-                                        type='review'
-                                        value={review}
-                                        onChange={(e) => setReview(e.target.value)}
-                                    />
-                                </label>
-                                <label>
-                                    stars
-                                    <input
-                                        type='number'
-                                        value={stars}
-                                        onChange={(e) => setStars(e.target.value)}
-                                    />
-                                </label>
-                                <div onClick={handleSubmit} className='form-button'>submit</div>
-                            </form>
-                        )} */}
                     </>
                 )}
             </div>

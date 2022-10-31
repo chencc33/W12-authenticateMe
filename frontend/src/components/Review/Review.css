@@ -65,12 +65,17 @@
     border-radius: 4px;
     text-decoration: none;
     width: fit-content;
+    /* margin-left: 10%; */
+    background-color: rgb(255, 56, 92);
+    color: whitesmoke;
+    border: none
+}
 
-    margin-left: 10%;
-
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
+.create-review {
+    margin-left: 0%;
+    background-color: rgb(255, 56, 92);
+    color: whitesmoke;
+    border: none
 }
 
 .form-button {
@@ -100,4 +105,8 @@
     color: #333;
     background-color: #fff;
     border-color: #ccc;
+}
+
+.review-detail-delete {
+    margin-left: 10%;
 }
